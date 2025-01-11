@@ -1,19 +1,10 @@
 <script lang="ts">
   import Counter from './components/Counter.svelte'
-  import Header from './components/Header.svelte';  
-  import Footer from './components/Footer.svelte';
-  import Logo from './components/Logo.svelte';
+  import Header from './components/Header.svelte';
   import "./app.css"
-    import { Route, Router } from 'svelte-routing';
 </script>
 
-<Router>
-  <Logo/>
+<main class="m-5 rounded-lg border-white border-2 drop-shadow shadow-white text-center">
+  <h1 class="shadow-pink-400 [text-shadow:_3px_5px_0_var(--tw-shadow-color)]">Honor and revere the Ahoge.</h1>
   <Header />
-  <Route path="/tool1" component={Header}/>
-  <Route path="/tool2" component={Footer}/>
-  <Route path="/tool3" component={Logo}/>
-  <p>{window.navigator.userAgent}</p>
-  <Footer />
-</Router>
-
+</main>
