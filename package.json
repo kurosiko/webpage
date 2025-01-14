@@ -1,28 +1,27 @@
 {
-  "name": "webpage",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json"
-  },
-  "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^5.0.3",
-    "@tsconfig/svelte": "^5.0.4",
-    "autoprefixer": "^10.4.20",
-    "css": "^3.0.0",
-    "post": "^0.0.1",
-    "prettier-plugin-svelte": "^3.3.2",
-    "svelte": "^5.15.0",
-    "svelte-check": "^4.1.1",
-    "tailwindcss": "^3.4.17",
-    "typescript": "~5.6.2",
-    "vite": "^6.0.5"
-  },
-  "dependencies": {
-    "svelte-routing": "^2.13.0"
-  }
+    "name": "webpage",
+    "version": "0.0.0",
+    "devDependencies": {
+        "@sveltejs/adapter-auto": "^3.3.1",
+        "@sveltejs/kit": "^2.15.2",
+        "@sveltejs/vite-plugin-svelte": "^5.0.3",
+        "autoprefixer": "^10.4.20",
+        "css": "^3.0.0",
+        "post": "^0.0.1",
+        "prettier-plugin-svelte": "^3.3.2",
+        "svelte": "^5.15.0",
+        "svelte-check": "^4.1.1",
+        "svelte-routing": "^2.13.0",
+        "tailwindcss": "^3.4.17",
+        "typescript": "~5.6.2",
+        "vite": "^6.0.5"
+    },
+    "private": true,
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview",
+        "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
+    },
+    "type": "module"
 }

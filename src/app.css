@@ -2,16 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 :root {
-  background-color:#000;
-  color: white;
+    background-color: #000;
+    color: white;
 }
 h1 {
-  color: white;
-  font-family: "custom";
-  font-size: 80px;
+    color: white;
+    font-family: "custom";
+    font-size: 80px;
 }
 
 @font-face {
-  font-family: "custom";
-  src: url("./assets/font/Jersey15-Regular.ttf") format("truetype");
+    font-family: "custom";
+    src: url("./assets/font/Jersey15-Regular.ttf") format("truetype");
 }
+
+.content h1 {
+    @apply text-6xl font-display;
+}
+
+.content h2 {
+    @apply text-2xl;
+}
+
+
