@@ -1,11 +1,15 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 :root {
     background-color: #000;
     color: white;
+    width: 100vw;
 }
-h1 {
+
+* {
+    box-sizing: border-box;
+}
+
+.logo {
     color: white;
     font-family: "custom";
     font-size: 80px;
@@ -16,12 +20,6 @@ h1 {
     src: url("./assets/font/Jersey15-Regular.ttf") format("truetype");
 }
 
-.content h1 {
-    @apply text-6xl font-display;
-}
 
-.content h2 {
-    @apply text-2xl;
-}
 
 

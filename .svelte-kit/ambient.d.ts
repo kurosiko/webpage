@@ -28,6 +28,7 @@
 declare module '$env/static/private' {
 	export const ALLUSERSPROFILE: string;
 	export const APPDATA: string;
+	export const BUNDLED_DEBUGPY_PATH: string;
 	export const chocolateyinstall: string;
 	export const CHROME_CRASHPAD_PIPE_NAME: string;
 	export const COLORTERM: string;
@@ -37,10 +38,8 @@ declare module '$env/static/private' {
 	export const ComSpec: string;
 	export const CUDA_PATH: string;
 	export const CUDA_PATH_V12_3: string;
+	export const DEBUGPY_ADAPTER_ENDPOINTS: string;
 	export const DriverData: string;
-	export const EFC_13068: string;
-	export const FPS_BROWSER_APP_PROFILE_STRING: string;
-	export const FPS_BROWSER_USER_PROFILE_STRING: string;
 	export const GIT_ASKPASS: string;
 	export const GOPATH: string;
 	export const HOMEDRIVE: string;
@@ -80,7 +79,7 @@ declare module '$env/static/private' {
 	export const ProgramW6432: string;
 	export const PSModulePath: string;
 	export const PUBLIC: string;
-	export const SESSIONNAME: string;
+	export const PYDEVD_DISABLE_FILE_VALIDATION: string;
 	export const SystemDrive: string;
 	export const SystemRoot: string;
 	export const TEMP: string;
@@ -93,6 +92,7 @@ declare module '$env/static/private' {
 	export const USERPROFILE: string;
 	export const VBOX_HWVIRTEX_IGNORE_SVM_IN_USE: string;
 	export const VK_SDK_PATH: string;
+	export const VS140COMNTOOLS: string;
 	export const VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
 	export const VSCODE_GIT_ASKPASS_MAIN: string;
 	export const VSCODE_GIT_ASKPASS_NODE: string;
@@ -134,6 +134,7 @@ declare module '$env/dynamic/private' {
 	export const env: {
 		ALLUSERSPROFILE: string;
 		APPDATA: string;
+		BUNDLED_DEBUGPY_PATH: string;
 		chocolateyinstall: string;
 		CHROME_CRASHPAD_PIPE_NAME: string;
 		COLORTERM: string;
@@ -143,10 +144,8 @@ declare module '$env/dynamic/private' {
 		ComSpec: string;
 		CUDA_PATH: string;
 		CUDA_PATH_V12_3: string;
+		DEBUGPY_ADAPTER_ENDPOINTS: string;
 		DriverData: string;
-		EFC_13068: string;
-		FPS_BROWSER_APP_PROFILE_STRING: string;
-		FPS_BROWSER_USER_PROFILE_STRING: string;
 		GIT_ASKPASS: string;
 		GOPATH: string;
 		HOMEDRIVE: string;
@@ -186,7 +185,7 @@ declare module '$env/dynamic/private' {
 		ProgramW6432: string;
 		PSModulePath: string;
 		PUBLIC: string;
-		SESSIONNAME: string;
+		PYDEVD_DISABLE_FILE_VALIDATION: string;
 		SystemDrive: string;
 		SystemRoot: string;
 		TEMP: string;
@@ -199,6 +198,7 @@ declare module '$env/dynamic/private' {
 		USERPROFILE: string;
 		VBOX_HWVIRTEX_IGNORE_SVM_IN_USE: string;
 		VK_SDK_PATH: string;
+		VS140COMNTOOLS: string;
 		VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
 		VSCODE_GIT_ASKPASS_MAIN: string;
 		VSCODE_GIT_ASKPASS_NODE: string;

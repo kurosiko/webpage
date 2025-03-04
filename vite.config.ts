@@ -1,10 +1,14 @@
 import { defineConfig } from 'vite'
 import { sveltekit } from "@sveltejs/kit/vite"
-// https://vite.dev/config/
+import tailwindcss from "@tailwindcss/vite"
 export default defineConfig({  
   base:"./",
   build: {
     outDir:"./docs"
   },
-  plugins: [sveltekit()],
+  plugins: [
+    tailwindcss(),
+    sveltekit()
+
+  ],
 })

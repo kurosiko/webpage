@@ -1,4 +1,4 @@
 <script lang="ts">
 </script>
 
-<div><h1>Test</h1></div>
+<div class="text-center"><h1>Test</h1></div>

@@ -1,0 +1,1 @@
+import{a,t as e}from"../chunks/disclose-version.BGtYnW3F.js";import"../chunks/legacy.DofSEwE7.js";var i=e("<div>This is the home of media sector</div>");function m(o){var t=i();a(o,t)}export{m as component};
