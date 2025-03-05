@@ -65,6 +65,10 @@ declare module '$env/static/private' {
 	export const ProgramW6432: string;
 	export const PSModulePath: string;
 	export const PUBLIC: string;
+<<<<<<< HEAD
+=======
+	export const PWD: string;
+>>>>>>> upgrade-postcss-&-sveltekit(might-be-a-breaking-change)
 	export const SystemDrive: string;
 	export const SystemRoot: string;
 	export const TEMP: string;
@@ -159,6 +163,10 @@ declare module '$env/dynamic/private' {
 		ProgramW6432: string;
 		PSModulePath: string;
 		PUBLIC: string;
+<<<<<<< HEAD
+=======
+		PWD: string;
+>>>>>>> upgrade-postcss-&-sveltekit(might-be-a-breaking-change)
 		SystemDrive: string;
 		SystemRoot: string;
 		TEMP: string;

@@ -1,8 +1,8 @@
-import { S as pop, Q as push, T as slot } from "../../chunks/index.js";
+import { S as pop, P as push, T as slot } from "../../chunks/index.js";
 import "clsx";
 function Header($$payload, $$props) {
   push();
-  $$payload.out += `<header id="header" class="sticky top-0 left-0 px-5"><div class="flex bg-black/80 backdrop-blur-sm"><div class="basis-1/2"><a href="/"><h1 class="logo">home</h1></a></div> <ul class="flex gap-7 text-xl flex-auto justify-center items-center box-border [&amp;>li]:flex [&amp;>li]:flex-auto [&amp;>li]:flex-col [&amp;>li]:text-center [&amp;>li>a]:flex-auto [&amp;>li>a]:transition-all [&amp;>li>a]:rounded-full [&amp;>li>a]:p-2"><li><a href="/works">Works</a></li> <li><a href="/media">Media</a></li> <li><a href="/ahoge">Ahoge</a></li></ul></div></header>`;
+  $$payload.out += `<header id="header" class="sticky top-0 left-0 px-5 z-100"><div class="flex bg-black/80 backdrop-blur-sm"><div class="basis-1/2"><a href="/"><h1 class="logo">home</h1></a></div> <ul class="flex gap-7 text-xl flex-auto justify-center items-center box-border [&amp;>li]:flex [&amp;>li]:flex-auto [&amp;>li]:flex-col [&amp;>li]:text-center [&amp;>li>a]:flex-auto [&amp;>li>a]:transition-all [&amp;>li>a]:rounded-full [&amp;>li>a]:p-2"><li><a href="/works">Works</a></li> <li><a href="/media">Media</a></li> <li><a href="/ahoge">Ahoge</a></li></ul></div></header>`;
   pop();
 }
 function Footer($$payload) {

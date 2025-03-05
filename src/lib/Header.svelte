@@ -19,7 +19,7 @@
     });
 </script>
 <style></style>
-<header id="header" class="sticky top-0 left-0 px-5">
+<header id="header" class="sticky top-0 left-0 px-5 z-100">
     <div class="flex bg-black/80 backdrop-blur-sm">
         <div class="basis-1/2">
             <a href="/"><h1 class="logo">home</h1></a>

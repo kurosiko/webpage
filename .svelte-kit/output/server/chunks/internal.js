@@ -1,7 +1,9 @@
-import { a as active_reaction, i as is_runes, D as DERIVED, b as BLOCK_EFFECT, d as derived_sources, s as state_unsafe_mutation, c as increment_write_version, e as DIRTY, f as set_signal_status, C as CLEAN, U as UNOWNED, g as schedule_effect, M as MAYBE_DIRTY, h as active_effect, j as BRANCH_EFFECT, k as new_deps, u as untracked_writes, l as set_untracked_writes, H as HYDRATION_ERROR, m as get_next_sibling, o as define_property, p as set_active_reaction, q as set_active_effect, r as is_array, t as init_operations, v as get_first_child, w as HYDRATION_START, x as HYDRATION_END, y as hydration_failed, z as clear_text_content, A as array_from, E as component_root, F as create_text, G as branch, I as push, J as pop, K as component_context, L as get, N as LEGACY_PROPS, O as flush_sync, P as render, Q as push$1, R as setContext, S as pop$1 } from "./index.js";
+import { i as increment_write_version, D as DIRTY, s as set_signal_status, C as CLEAN, U as UNOWNED, a as DERIVED, b as schedule_effect, M as MAYBE_DIRTY, c as active_reaction, u as untracking, d as is_runes, e as BLOCK_EFFECT, f as derived_sources, g as state_unsafe_mutation, h as active_effect, j as BRANCH_EFFECT, R as ROOT_EFFECT, k as untracked_writes, l as set_untracked_writes, H as HYDRATION_ERROR, m as get_next_sibling, n as define_property, o as set_active_reaction, p as set_active_effect, q as is_array, r as init_operations, t as get_first_child, v as HYDRATION_START, w as HYDRATION_END, x as hydration_failed, y as clear_text_content, z as array_from, A as component_root, E as create_text, F as branch, G as push, I as pop, J as component_context, K as get, L as LEGACY_PROPS, N as flushSync, O as render, P as push$1, Q as setContext, S as pop$1 } from "./index.js";
+import { s as safe_equals, e as equals } from "./equality.js";
 import "clsx";
 let base = "";
 let assets = base;
+const app_dir = "_app";
 const initial = { base, assets };
 function override(paths) {
   base = paths.base;
@@ -24,14 +26,10 @@ function set_public_env(environment) {
 function set_safe_public_env(environment) {
   safe_public_env = environment;
 }
-function equals(value) {
-  return value === this.v;
-}
-function safe_not_equal(a, b) {
-  return a != a ? b == b : a !== b || a !== null && typeof a === "object" || typeof a === "function";
-}
-function safe_equals(value) {
-  return !safe_not_equal(value, this.v);
+function hydration_mismatch(location) {
+  {
+    console.warn(`https://svelte.dev/e/hydration_mismatch`);
+  }
 }
 function source(v, stack) {
   var signal = {
@@ -54,7 +52,7 @@ function mutable_source(initial_value, immutable = false) {
   return s;
 }
 function set(source2, value) {
-  if (active_reaction !== null && is_runes() && (active_reaction.f & (DERIVED | BLOCK_EFFECT)) !== 0 && // If the source was created locally within the current derived, then
+  if (active_reaction !== null && !untracking && is_runes() && (active_reaction.f & (DERIVED | BLOCK_EFFECT)) !== 0 && // If the source was created locally within the current derived, then
   // we allow the mutation.
   (derived_sources === null || !derived_sources.includes(source2))) {
     state_unsafe_mutation();
@@ -67,16 +65,11 @@ function internal_set(source2, value) {
     source2.v = value;
     source2.wv = increment_write_version();
     mark_reactions(source2, DIRTY);
-    if (active_effect !== null && (active_effect.f & CLEAN) !== 0 && (active_effect.f & BRANCH_EFFECT) === 0) {
-      if (new_deps !== null && new_deps.includes(source2)) {
-        set_signal_status(active_effect, DIRTY);
-        schedule_effect(active_effect);
+    if (active_effect !== null && (active_effect.f & CLEAN) !== 0 && (active_effect.f & (BRANCH_EFFECT | ROOT_EFFECT)) === 0) {
+      if (untracked_writes === null) {
+        set_untracked_writes([source2]);
       } else {
-        if (untracked_writes === null) {
-          set_untracked_writes([source2]);
-        } else {
-          untracked_writes.push(source2);
-        }
+        untracked_writes.push(source2);
       }
     }
   }
@@ -105,11 +98,6 @@ function mark_reactions(signal, status) {
         );
       }
     }
-  }
-}
-function hydration_mismatch(location) {
-  {
-    console.warn(`https://svelte.dev/e/hydration_mismatch`);
   }
 }
 let hydrating = false;
@@ -186,8 +174,10 @@ function handle_event_propagation(event) {
       current_target.host || null;
       try {
         var delegated = current_target["__" + event_name];
-        if (delegated !== void 0 && !/** @type {any} */
-        current_target.disabled) {
+        if (delegated !== void 0 && (!/** @type {any} */
+        current_target.disabled || // DOM could've been updated already by the time this is reached, so we check this as well
+        // -> the target could not have been disabled because it emits the event in the first place
+        event.target === current_target)) {
           if (is_array(delegated)) {
             var [fn, ...data] = delegated;
             fn.apply(current_target, [event, ...data]);
@@ -425,7 +415,7 @@ class Svelte4Component {
       recover: options2.recover
     });
     if (!options2?.props?.$$host || options2.sync === false) {
-      flush_sync();
+      flushSync();
     }
     this.#events = props.$$events;
     for (const key of Object.keys(this.#instance)) {
@@ -568,7 +558,6 @@ function Root($$payload, $$props) {
 }
 const root = asClassComponent(Root);
 const options = {
-  app_dir: "_app",
   app_template_contains_nonce: false,
   csp: { "mode": "auto", "directives": { "upgrade-insecure-requests": false, "block-all-mixed-content": false }, "reportOnly": { "upgrade-insecure-requests": false, "block-all-mixed-content": false } },
   csrf_check_origin: true,
@@ -654,7 +643,7 @@ const options = {
 		<div class="error">
 			<span class="status">` + status + '</span>\n			<div class="message">\n				<h1>' + message + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n"
   },
-  version_hash: "1gdixdk"
+  version_hash: "24yrcp"
 };
 async function get_hooks() {
   let handle;
@@ -675,7 +664,7 @@ async function get_hooks() {
 export {
   assets as a,
   base as b,
-  safe_public_env as c,
+  app_dir as c,
   read_implementation as d,
   options as e,
   set_private_env as f,
@@ -691,5 +680,5 @@ export {
   public_env as p,
   set_prerendering as q,
   reset as r,
-  safe_not_equal as s
+  safe_public_env as s
 };
