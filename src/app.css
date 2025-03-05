@@ -1,4 +1,6 @@
 @import "tailwindcss";
+
+
 :root {
     background-color: #000;
     color: white;
@@ -19,7 +21,3 @@
     font-family: "custom";
     src: url("./assets/font/Jersey15-Regular.ttf") format("truetype");
 }
-
-
-
-

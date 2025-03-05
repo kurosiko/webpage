@@ -11,5 +11,5 @@
   <slot/>
 </div>
 <Footer />
-<style>
-</style>
+
+

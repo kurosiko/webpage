@@ -28,7 +28,6 @@
 declare module '$env/static/private' {
 	export const ALLUSERSPROFILE: string;
 	export const APPDATA: string;
-	export const BUNDLED_DEBUGPY_PATH: string;
 	export const chocolateyinstall: string;
 	export const CHROME_CRASHPAD_PIPE_NAME: string;
 	export const COLORTERM: string;
@@ -38,7 +37,6 @@ declare module '$env/static/private' {
 	export const ComSpec: string;
 	export const CUDA_PATH: string;
 	export const CUDA_PATH_V12_3: string;
-	export const DEBUGPY_ADAPTER_ENDPOINTS: string;
 	export const DriverData: string;
 	export const GIT_ASKPASS: string;
 	export const GOPATH: string;
@@ -79,7 +77,7 @@ declare module '$env/static/private' {
 	export const ProgramW6432: string;
 	export const PSModulePath: string;
 	export const PUBLIC: string;
-	export const PYDEVD_DISABLE_FILE_VALIDATION: string;
+	export const PWD: string;
 	export const SystemDrive: string;
 	export const SystemRoot: string;
 	export const TEMP: string;
@@ -134,7 +132,6 @@ declare module '$env/dynamic/private' {
 	export const env: {
 		ALLUSERSPROFILE: string;
 		APPDATA: string;
-		BUNDLED_DEBUGPY_PATH: string;
 		chocolateyinstall: string;
 		CHROME_CRASHPAD_PIPE_NAME: string;
 		COLORTERM: string;
@@ -144,7 +141,6 @@ declare module '$env/dynamic/private' {
 		ComSpec: string;
 		CUDA_PATH: string;
 		CUDA_PATH_V12_3: string;
-		DEBUGPY_ADAPTER_ENDPOINTS: string;
 		DriverData: string;
 		GIT_ASKPASS: string;
 		GOPATH: string;
@@ -185,7 +181,7 @@ declare module '$env/dynamic/private' {
 		ProgramW6432: string;
 		PSModulePath: string;
 		PUBLIC: string;
-		PYDEVD_DISABLE_FILE_VALIDATION: string;
+		PWD: string;
 		SystemDrive: string;
 		SystemRoot: string;
 		TEMP: string;
