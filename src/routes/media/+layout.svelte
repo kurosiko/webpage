@@ -1,3 +1,9 @@
+<script>
+
+    import CheckAdult from "$lib/Check_adult.svelte";
+
+</script>
+<CheckAdult></CheckAdult>
 <div>
     my recommend media contents→
     <a href="/media/video">Video</a>

@@ -5,9 +5,12 @@ export default {
   preprocess: vitePreprocess(),
   kit: {
     adapter: adapter({
-      pages:"docs",
-      fallback:"index.html"
-    })
+      pages: "docs",
+      assets:"docs",
+      precompress:false,
+      fallback: "404.html",
+      strict:true
+    }),
   }
 }
 

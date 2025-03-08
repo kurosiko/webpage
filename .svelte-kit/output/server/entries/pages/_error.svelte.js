@@ -1,4 +1,4 @@
-import { V as getContext, W as store_get, X as unsubscribe_stores, S as pop, P as push } from "../../chunks/index.js";
+import { W as getContext, X as store_get, Y as unsubscribe_stores, S as pop, P as push } from "../../chunks/index.js";
 import "../../chunks/client.js";
 import { e as escape_html } from "../../chunks/escaping.js";
 const getStores = () => {
@@ -25,7 +25,7 @@ const page = {
 function _error($$payload, $$props) {
   push();
   var $$store_subs;
-  $$payload.out += `<div class="flex flex-col justify-center items-center"><h1>${escape_html(store_get($$store_subs ??= {}, "$page", page).url)}</h1> <h1>${escape_html(store_get($$store_subs ??= {}, "$page", page).status)}</h1> <h1>${escape_html(store_get($$store_subs ??= {}, "$page", page).error?.message)}</h1> <img src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif" alt="funny guy"></div>`;
+  $$payload.out += `<div class="flex flex-col justify-center items-center"><h1>${escape_html(store_get($$store_subs ??= {}, "$page", page).url)}</h1> <h1>${escape_html(store_get($$store_subs ??= {}, "$page", page).status)}</h1> <h1>${escape_html(store_get($$store_subs ??= {}, "$page", page).error?.message)}</h1></div>`;
   if ($$store_subs) unsubscribe_stores($$store_subs);
   pop();
 }

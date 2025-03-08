@@ -1,5 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
+    import Scrollbar from "./Scrollbar.svelte";
     function getRandomColor() {
         const h = Math.floor(Math.random() * 360);
         const s = Math.floor(Math.random() * 30) + 70; // 50% to 100% saturation
@@ -19,8 +20,8 @@
     });
 </script>
 <style></style>
-<header id="header" class="sticky top-0 left-0 px-5 z-100">
-    <div class="flex bg-black/80 backdrop-blur-sm">
+<header id="header" class="sticky top-0 left-0 z-100">
+    <div class="flex bg-black/80 backdrop-blur-sm px-5">
         <div class="basis-1/2">
             <a href="/"><h1 class="logo">home</h1></a>
         </div>
@@ -32,5 +33,6 @@
             <li><a href="/ahoge">Ahoge</a></li>
         </ul>
     </div>
+    <Scrollbar/>
 </header>
 

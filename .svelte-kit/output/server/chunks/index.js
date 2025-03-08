@@ -962,6 +962,9 @@ function render(component, options = {}) {
     body: payload.out
   };
 }
+function stringify(value) {
+  return typeof value === "string" ? value : value == null ? "" : value + "";
+}
 function store_get(store_values, store_name, store) {
   if (store_name in store_values && store_values[store_name][0] === store) {
     return store_values[store_name][2];
@@ -1005,6 +1008,7 @@ function ensure_array_like(array_like_or_iterator) {
   }
 }
 export {
+  noop as $,
   component_root as A,
   BROWSER as B,
   CLEAN as C,
@@ -1024,14 +1028,14 @@ export {
   setContext as Q,
   ROOT_EFFECT as R,
   pop as S,
-  slot as T,
+  stringify as T,
   UNOWNED as U,
-  getContext as V,
-  store_get as W,
-  unsubscribe_stores as X,
-  bind_props as Y,
-  ensure_array_like as Z,
-  noop as _,
+  slot as V,
+  getContext as W,
+  store_get as X,
+  unsubscribe_stores as Y,
+  bind_props as Z,
+  ensure_array_like as _,
   DERIVED as a,
   schedule_effect as b,
   active_reaction as c,

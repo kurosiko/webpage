@@ -8,6 +8,13 @@
       "_internal.js"
     ]
   },
+  "_attributes.js": {
+    "file": "chunks/attributes.js",
+    "name": "attributes",
+    "imports": [
+      "_escaping.js"
+    ]
+  },
   "_client.js": {
     "file": "chunks/client.js",
     "name": "client",
@@ -76,10 +83,11 @@
     "src": "src/routes/+layout.svelte",
     "isEntry": true,
     "imports": [
-      "_index.js"
+      "_index.js",
+      "_attributes.js"
     ],
     "css": [
-      "_app/immutable/assets/_layout.NZWZRjvi.css"
+      "_app/immutable/assets/_layout.Dzh1_sab.css"
     ],
     "assets": [
       "_app/immutable/assets/Jersey15-Regular.Xlxx0Zur.ttf"
@@ -124,7 +132,7 @@
     "imports": [
       "_index.js",
       "_client.js",
-      "_escaping.js"
+      "_attributes.js"
     ]
   },
   "src/routes/media/video/+page.svelte": {

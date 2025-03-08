@@ -1,5 +1,5 @@
 import "clsx";
-import { Y as bind_props } from "../../../chunks/index.js";
+import { Z as bind_props } from "../../../chunks/index.js";
 import { e as escape_html } from "../../../chunks/escaping.js";
 function Title($$payload, $$props) {
   let title = $$props["title"];
