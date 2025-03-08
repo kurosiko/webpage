@@ -571,7 +571,7 @@ const options = {
   root,
   service_worker: false,
   templates: {
-    app: ({ head, body, assets: assets2, nonce, env }) => '<!doctype html>\r\n<html lang="en">\r\n  <head>\r\n    \r\n    <meta charset="UTF-8" />\r\n    <link rel="icon" type="image/svg+xml" href="./src/assets/logo.png" />\r\n    <meta name="viewport" content="width=device-width, initial-scale=1.0" />\r\n    <title>in dev</title>\r\n    ' + head + '\r\n  </head>\r\n  <body>\r\n    <div id="app">' + body + "</div>\r\n  </body>\r\n</html>\r\n",
+    app: ({ head, body, assets: assets2, nonce, env }) => '<!doctype html>\r\n<html lang="en">\r\n  <head>\r\n    \r\n    <meta charset="UTF-8" />\r\n    <link rel="icon" type="image/svg+xml" href="/src/assets/logo.png" />\r\n    <meta name="viewport" content="width=device-width, initial-scale=1.0" />\r\n    <title>in dev</title>\r\n    ' + head + '\r\n  </head>\r\n  <body>\r\n    <div id="app">' + body + "</div>\r\n  </body>\r\n</html>\r\n",
     error: ({ status, message }) => '<!doctype html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<title>' + message + `</title>
 
 		<style>
@@ -643,7 +643,7 @@ const options = {
 		<div class="error">
 			<span class="status">` + status + '</span>\n			<div class="message">\n				<h1>' + message + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n"
   },
-  version_hash: "15m06fw"
+  version_hash: "e0uuc5"
 };
 async function get_hooks() {
   let handle;

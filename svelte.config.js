@@ -8,7 +8,7 @@ export default {
       pages: "docs",
       assets:"docs",
       precompress:false,
-      fallback: "404.html",
+      fallback: "200.html",
       strict:true
     }),
   }
