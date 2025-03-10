@@ -1,21 +1,7 @@
 import { i as increment_write_version, D as DIRTY, s as set_signal_status, C as CLEAN, U as UNOWNED, a as DERIVED, b as schedule_effect, M as MAYBE_DIRTY, c as active_reaction, u as untracking, d as is_runes, e as BLOCK_EFFECT, f as derived_sources, g as state_unsafe_mutation, h as active_effect, j as BRANCH_EFFECT, R as ROOT_EFFECT, k as untracked_writes, l as set_untracked_writes, H as HYDRATION_ERROR, m as get_next_sibling, n as define_property, o as set_active_reaction, p as set_active_effect, q as is_array, r as init_operations, t as get_first_child, v as HYDRATION_START, w as HYDRATION_END, x as hydration_failed, y as clear_text_content, z as array_from, A as component_root, E as create_text, F as branch, G as push, I as pop, J as component_context, K as get, L as LEGACY_PROPS, N as flushSync, O as render, P as push$1, Q as setContext, S as pop$1 } from "./index.js";
 import { s as safe_equals, e as equals } from "./equality.js";
 import "clsx";
-let base = "/webpage";
-let assets = base;
-const app_dir = "_app";
-const initial = { base, assets };
-function override(paths) {
-  base = paths.base;
-  assets = paths.assets;
-}
-function reset() {
-  base = initial.base;
-  assets = initial.assets;
-}
-function set_assets(path) {
-  assets = initial.assets = path;
-}
+import "./paths.js";
 let public_env = {};
 let safe_public_env = {};
 function set_private_env(environment) {
@@ -571,7 +557,7 @@ const options = {
   root,
   service_worker: false,
   templates: {
-    app: ({ head, body, assets: assets2, nonce, env }) => '<!doctype html>\r\n<html lang="en">\r\n  <head>\r\n    \r\n    <meta charset="UTF-8" />\r\n    <link rel="icon" type="image/svg+xml" href="/src/assets/logo.png" />\r\n    <meta name="viewport" content="width=device-width, initial-scale=1.0" />\r\n    <title>in dev</title>\r\n    ' + head + '\r\n  </head>\r\n  <body>\r\n    <div id="app">' + body + "</div>\r\n  </body>\r\n</html>\r\n",
+    app: ({ head, body, assets, nonce, env }) => '<!doctype html>\r\n<html lang="en">\r\n  <head>\r\n    \r\n    <meta charset="UTF-8" />\r\n    <link rel="icon" type="image/svg+xml" href="/src/assets/logo.png" />\r\n    <meta name="viewport" content="width=device-width, initial-scale=1.0" />\r\n    <title>in dev</title>\r\n    ' + head + '\r\n  </head>\r\n  <body>\r\n    <div id="app">' + body + "</div>\r\n  </body>\r\n</html>\r\n",
     error: ({ status, message }) => '<!doctype html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<title>' + message + `</title>
 
 		<style>
@@ -643,7 +629,7 @@ const options = {
 		<div class="error">
 			<span class="status">` + status + '</span>\n			<div class="message">\n				<h1>' + message + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n"
   },
-  version_hash: "glkoa9"
+  version_hash: "1xse60n"
 };
 async function get_hooks() {
   let handle;
@@ -662,23 +648,17 @@ async function get_hooks() {
   };
 }
 export {
-  assets as a,
-  base as b,
-  app_dir as c,
-  read_implementation as d,
-  options as e,
-  set_private_env as f,
-  prerendering as g,
-  set_public_env as h,
-  get_hooks as i,
-  set_safe_public_env as j,
-  set_read_implementation as k,
-  set_assets as l,
-  set_building as m,
-  set_manifest as n,
-  override as o,
+  set_private_env as a,
+  prerendering as b,
+  set_public_env as c,
+  set_safe_public_env as d,
+  set_read_implementation as e,
+  set_building as f,
+  get_hooks as g,
+  set_manifest as h,
+  set_prerendering as i,
+  options as o,
   public_env as p,
-  set_prerendering as q,
-  reset as r,
+  read_implementation as r,
   safe_public_env as s
 };

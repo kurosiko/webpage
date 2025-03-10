@@ -1,7 +1,8 @@
 import { B as BROWSER } from "./chunks/index.js";
-import { a as assets, b as base, o as override, r as reset, c as app_dir, p as public_env, s as safe_public_env, d as read_implementation, e as options, f as set_private_env, g as prerendering, h as set_public_env, i as get_hooks, j as set_safe_public_env, k as set_read_implementation } from "./chunks/internal.js";
+import { a as assets, b as base, o as override, r as reset, c as app_dir } from "./chunks/paths.js";
 import * as devalue from "devalue";
 import { m as make_trackable, d as disable_search, a as decode_params, w as writable, r as readable, n as normalize_path, b as resolve, c as decode_pathname, v as validate_layout_server_exports, e as validate_layout_exports, f as validate_page_server_exports, g as validate_page_exports, h as validate_server_exports } from "./chunks/exports.js";
+import { p as public_env, s as safe_public_env, r as read_implementation, o as options, a as set_private_env, b as prerendering, c as set_public_env, g as get_hooks, d as set_safe_public_env, e as set_read_implementation } from "./chunks/internal.js";
 import { parse, serialize } from "cookie";
 import * as set_cookie_parser from "set-cookie-parser";
 const SVELTE_KIT_ASSETS = "/_svelte_kit_assets";

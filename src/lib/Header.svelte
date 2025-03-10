@@ -1,6 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import Scrollbar from "./Scrollbar.svelte";
+    import Link from "./Link.svelte";
     function getRandomColor() {
         const h = Math.floor(Math.random() * 360);
         const s = Math.floor(Math.random() * 30) + 70; // 50% to 100% saturation
@@ -23,14 +24,14 @@
 <header id="header" class="sticky top-0 left-0 z-100">
     <div class="flex bg-black/80 backdrop-blur-sm px-5">
         <div class="basis-1/2">
-            <a href="/"><h1 class="logo">home</h1></a>
+            <Link href=""><h1 class="logo">home</h1></Link>
         </div>
         <ul class=" flex gap-7 text-xl flex-auto justify-center items-center box-border [&>li]:flex [&>li]:flex-auto [&>li]:flex-col [&>li]:text-center [&>li>a]:flex-auto [&>li>a]:transition-all [&>li>a]:rounded-full [&>li>a]:p-2">
             <li>
-                <a href="/works">Works</a>
+                <Link href="works">Works</Link>
             </li>
-            <li><a href="/media">Media</a></li>
-            <li><a href="/ahoge">Ahoge</a></li>
+            <li><Link href="media">Media</Link></li>
+            <li><Link href="ahoge">Ahoge</Link></li>
         </ul>
     </div>
     <Scrollbar/>

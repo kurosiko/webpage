@@ -1,3 +1,8 @@
+<script>
+
+    import Link from "$lib/Link.svelte";
+
+</script>
 <div class="flex overflow-x-scroll aspect-video snap-x  snap-mandatory [&>div]:aspect-video [&>div]:snap-center gap-10">
     <div>
         <iframe class="w-full h-full" 
@@ -32,4 +37,4 @@
         </iframe>
     </div>
 </div>
-<a href="#test">Jump to 3rd</a>
+<Link href="#test">Jump to 3rd</Link>

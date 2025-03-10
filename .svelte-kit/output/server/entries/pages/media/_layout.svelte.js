@@ -1,5 +1,6 @@
 import { S as pop, P as push, V as slot } from "../../../chunks/index.js";
 import "clsx";
+import { L as Link } from "../../../chunks/Link.js";
 function Check_adult($$payload, $$props) {
   push();
   {
@@ -11,7 +12,23 @@ function Check_adult($$payload, $$props) {
 }
 function _layout($$payload, $$props) {
   Check_adult($$payload);
-  $$payload.out += `<!----> <div>my recommend media contents→ <a href="/media/video">Video</a> <a href="/media/image">Image</a></div> <!---->`;
+  $$payload.out += `<!----> <div>my recommend media contents→ `;
+  Link($$payload, {
+    href: "media/video",
+    children: ($$payload2) => {
+      $$payload2.out += `<!---->Video`;
+    },
+    $$slots: { default: true }
+  });
+  $$payload.out += `<!----> `;
+  Link($$payload, {
+    href: "media/image",
+    children: ($$payload2) => {
+      $$payload2.out += `<!---->Image`;
+    },
+    $$slots: { default: true }
+  });
+  $$payload.out += `<!----></div> <!---->`;
   slot($$payload, $$props, "default", {});
   $$payload.out += `<!---->`;
 }
