@@ -1,4 +1,4 @@
-import { V as slot, Z as bind_props, S as pop, P as push, _ as ensure_array_like, T as stringify } from "../../../../chunks/index.js";
+import { _ as ensure_array_like, S as pop, T as stringify, P as push } from "../../../../chunks/index.js";
 import { u as updated, s as stores } from "../../../../chunks/client.js";
 import { a as attr } from "../../../../chunks/attributes.js";
 ({
@@ -7,15 +7,6 @@ import { a as attr } from "../../../../chunks/attributes.js";
   },
   check: stores.updated.check
 });
-function Viewer($$payload, $$props) {
-  push();
-  let data = $$props["data"];
-  $$payload.out += `<div class="fixed bg-black/50 inset-0 z-200 m-auto"><img${attr("src", data.url)}${attr("alt", `${data.url},${data.tweet},${data.user}`)} class="h-full object-scale-down m-auto"> <div class="relative top-[-50px]"><p>TESt</p> <p>TEStTEXT</p></div> <!---->`;
-  slot($$payload, $$props, "default", {});
-  $$payload.out += `<!----></div>`;
-  bind_props($$props, { data });
-  pop();
-}
 function _page($$payload, $$props) {
   push();
   let image = [];
@@ -31,21 +22,29 @@ function _page($$payload, $$props) {
     let item = each_array[$$index];
     if (item.url) {
       $$payload.out += "<!--[-->";
-      $$payload.out += `<div class="group relative"><img class="object-cover"${attr("src", `https://pbs.twimg.com/media/${item.url}`)}${attr("alt", item.url)}></div>`;
+      $$payload.out += `<div class="group relative"><img class="object-cover"${attr("src", `https://pbs.twimg.com/media/${item.url}`)}${attr("alt", item.url)}> <div class="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 m-auto transition-all flex flex-col [&amp;>*]:flex-auto [&amp;>*]:border-2 [&amp;>*]:w-full [&amp;>*]:border-pink-300 [&amp;>*]:mb-[-1px] justify-center text-center items-center">`;
+      if (item.tweet) {
+        $$payload.out += "<!--[-->";
+        $$payload.out += `<a${attr("href", `https://twitter.com/${item.user}`)} target="_blank">Profile</a>`;
+      } else {
+        $$payload.out += "<!--[!-->";
+        $$payload.out += `<p>Profile link not found</p>`;
+      }
+      $$payload.out += `<!--]--> `;
+      if (item.user && item.tweet) {
+        $$payload.out += "<!--[-->";
+        $$payload.out += `<a${attr("href", `https://twitter.com/${item.user}/status/${item.tweet}`)} target="_blank">Tweet</a>`;
+      } else {
+        $$payload.out += "<!--[!-->";
+        $$payload.out += `<p>Tweet link not found</p>`;
+      }
+      $$payload.out += `<!--]--></div></div>`;
     } else {
       $$payload.out += "<!--[!-->";
     }
     $$payload.out += `<!--]-->`;
   }
-  $$payload.out += `<!--]--> `;
-  Viewer($$payload, {
-    data: {
-      url: "https://pbs.twimg.com/media/Glrgf9xaYAA6-s5?format=jpg&name=large",
-      user: "seafirefly_",
-      tweet: "1899077035815018837"
-    }
-  });
-  $$payload.out += `<!----></div>`;
+  $$payload.out += `<!--]--></div>`;
   pop();
 }
 export {

@@ -88,7 +88,6 @@
         {#if item.url}
             <div class="group relative">
                 <img class="object-cover" src={`https://pbs.twimg.com/media/${item.url}`} alt={item.url}/>
-                <!--
                 <div class="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 m-auto transition-all flex flex-col [&>*]:flex-auto [&>*]:border-2 [&>*]:w-full [&>*]:border-pink-300 [&>*]:mb-[-1px] justify-center text-center items-center">
                     {#if item.tweet}
                         <a href={`https://twitter.com/${item.user}`} target="_blank">Profile</a>
@@ -101,11 +100,13 @@
                         <p>Tweet link not found</p>
                     {/if}
                 </div>
-                -->
+                
             </div>
         {/if}
     {/each}
+    <!--
     <Viewer data={{url: "https://pbs.twimg.com/media/Glrgf9xaYAA6-s5?format=jpg&name=large",user:"seafirefly_",tweet:"1899077035815018837"}}></Viewer>
+    -->
 </div>
 
 
