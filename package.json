@@ -29,5 +29,11 @@
         "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
     },
     "type": "module",
-    "dependencies": {}
+    "dependencies": {},
+    "overrides": {
+        "vite":{
+            "rollup":"npm:@rollup/wasm-node"
+        }
+    }
 }
+
