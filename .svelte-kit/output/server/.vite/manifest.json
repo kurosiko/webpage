@@ -104,7 +104,7 @@
       "_Link.js"
     ],
     "css": [
-      "_app/immutable/assets/_layout.D09fFjq1.css"
+      "_app/immutable/assets/_layout.76JnUeRr.css"
     ],
     "assets": [
       "_app/immutable/assets/Jersey15-Regular.Xlxx0Zur.ttf"
@@ -133,7 +133,8 @@
     "isEntry": true,
     "imports": [
       "_index.js",
-      "_Link.js"
+      "_Link.js",
+      "_attributes.js"
     ]
   },
   "src/routes/media/+page.svelte": {

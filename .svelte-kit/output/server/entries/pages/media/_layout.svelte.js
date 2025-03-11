@@ -1,6 +1,7 @@
-import { S as pop, P as push, V as slot } from "../../../chunks/index.js";
+import { S as pop, P as push, V as slot, T as stringify } from "../../../chunks/index.js";
 import "clsx";
 import { L as Link } from "../../../chunks/Link.js";
+import { a as attr } from "../../../chunks/attributes.js";
 function Check_adult($$payload, $$props) {
   push();
   {
@@ -28,7 +29,7 @@ function _layout($$payload, $$props) {
     },
     $$slots: { default: true }
   });
-  $$payload.out += `<!----></div> <!---->`;
+  $$payload.out += `<!----></div> <div class="md:flex rounded-md bg-red-500 p-2 font-bold text-xl gap-2 justify-center text-center items-center"${attr("style", `display: ${stringify("")};`)}><p>!!WARN!!!!</p> <p>These are not my creations</p> <p>I have no permission from their creators</p> <button class="border-2 border-amber-50 rounded-md p-2 bg-black">Hide warning message</button> <p>(In DEV)</p></div> <!---->`;
   slot($$payload, $$props, "default", {});
   $$payload.out += `<!---->`;
 }

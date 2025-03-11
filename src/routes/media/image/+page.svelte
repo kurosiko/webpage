@@ -1,15 +1,19 @@
 <script lang="ts">
     import {page} from "$app/state";
+    import Viewer from "$lib/Viewer.svelte";
     import { onMount } from "svelte";
     interface response_c{
-        [key:string]:string,
+        url:string | null,
+        user:string | null,
+        tweet:string | null
     }
     let ImagesDOM:()=>Promise<void>;
     let PostImage:()=>Promise<void>;
     let DeleteImage:(url:string)=>Promise<void>;
-    let image:response_c[] | null = [];
+    let Detail_Show:()=>void;
+    let image:response_c[] = [];
     let input = "";
-    let limit:number = 0
+    let limit:number = 20
     let rand:boolean = true
     let grid :number = 5
     let grid_auto :boolean = false
@@ -28,11 +32,14 @@
             body:JSON.stringify({rand:rand,limit:limit ? limit : 0})
         })
         const data = (await response.json()) as response_c[];
-        image = data;
+        if(!data) return
+        image = data
+        console.log(data)
+        
         return
         }
         PostImage = async ()=>{
-            const request = await fetch("https://api.kurosiko.com/db",{
+            const request = await fetch("https://api.kurosiko.com/reg-db",{
                 method:"POST",
                 mode:"cors",
                 body: input
@@ -41,12 +48,15 @@
             return
         }
         DeleteImage = async (url:string)=>{
-            const request = await fetch("https://api.kurosiko.com/db",{
-                method:"DELETE",
+            const request = await fetch("https://api.kurosiko.com/del-db",{
+                method:"POST",
                 mode:"cors",
                 body:url,
             })
             await ImagesDOM()
+        }
+        Detail_Show = ()=>{
+
         }
         fetch_eternal()
     })
@@ -73,18 +83,29 @@
 </div>
 
 
-<div class="grid w-full " style="grid-template-columns:repeat({grid_auto ? "auto-fit" : grid},minmax(0,1fr));">
-    {#if image != null}
-        {#each image as item}
+<div class="md:grid w-full " style="grid-template-columns:repeat({grid_auto ? "auto-fit" : grid},minmax(0,1fr));">
+    {#each image as item}
+        {#if item.url}
             <div class="group relative">
-                <img class="object-cover" src={item.url} alt={item.url}/>
-                <button class="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 m-auto transition-all" on:click={()=>DeleteImage(item.url)}>Delete</button>
+                <img class="object-cover" src={`https://pbs.twimg.com/media/${item.url}`} alt={item.url}/>
+                <!--
+                <div class="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 m-auto transition-all flex flex-col [&>*]:flex-auto [&>*]:border-2 [&>*]:w-full [&>*]:border-pink-300 [&>*]:mb-[-1px] justify-center text-center items-center">
+                    {#if item.tweet}
+                        <a href={`https://twitter.com/${item.user}`} target="_blank">Profile</a>
+                        {:else}
+                        <p>Profile link not found</p>
+                    {/if}
+                    {#if item.user && item.tweet}
+                        <a href={`https://twitter.com/${item.user}/status/${item.tweet}`} target="_blank">Tweet</a>
+                    {:else}
+                        <p>Tweet link not found</p>
+                    {/if}
+                </div>
+                -->
             </div>
-        {/each}
-    {/if}
+        {/if}
+    {/each}
+    <Viewer data={{url: "https://pbs.twimg.com/media/Glrgf9xaYAA6-s5?format=jpg&name=large",user:"seafirefly_",tweet:"1899077035815018837"}}></Viewer>
 </div>
 
-
-<style>
-</style>
 
