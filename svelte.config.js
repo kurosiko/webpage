@@ -11,9 +11,6 @@ export default {
             fallback: "index.html",
             strict: true,
         }),
-        paths: {
-            base: process.argv.includes("dev") ? "/" : "/webpage",
-        },
     },
 };
 
