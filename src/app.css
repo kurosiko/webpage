@@ -19,5 +19,5 @@
 
 @font-face {
     font-family: "custom";
-    src: url("./assets/font/Jersey15-Regular.ttf") format("truetype");
+    src: url("/assets/font/Jersey15-Regular.ttf") format("truetype");
 }

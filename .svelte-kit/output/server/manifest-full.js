@@ -7,10 +7,10 @@ function __memo(fn) {
 return {
 	appDir: "_app",
 	appPath: "_app",
-	assets: new Set([]),
-	mimeTypes: {},
+	assets: new Set(["assets/font/Jersey15-Regular.ttf","assets/logo.png"]),
+	mimeTypes: {".ttf":"font/ttf",".png":"image/png"},
 	_: {
-		client: {start:"_app/immutable/entry/start.C_ViMoFN.js",app:"_app/immutable/entry/app.BQo4pdd4.js",imports:["_app/immutable/entry/start.C_ViMoFN.js","_app/immutable/chunks/DDa0cJea.js","_app/immutable/chunks/DzLxjRAp.js","_app/immutable/chunks/DIeogL5L.js","_app/immutable/chunks/CUAGXukK.js","_app/immutable/chunks/BxI9I1nP.js","_app/immutable/chunks/BGKcGItD.js","_app/immutable/entry/app.BQo4pdd4.js","_app/immutable/chunks/DzLxjRAp.js","_app/immutable/chunks/DIeogL5L.js","_app/immutable/chunks/CRDblv9v.js","_app/immutable/chunks/nxxMPMlL.js","_app/immutable/chunks/B9QI8j-U.js","_app/immutable/chunks/DigXLuHG.js","_app/immutable/chunks/CWj6FrbW.js","_app/immutable/chunks/XNcYlZy4.js","_app/immutable/chunks/C670VDik.js","_app/immutable/chunks/D-jRvTjg.js","_app/immutable/chunks/BUZE7XSo.js","_app/immutable/chunks/CUAGXukK.js","_app/immutable/chunks/BGKcGItD.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
+		client: {start:"_app/immutable/entry/start.Cga2oRqd.js",app:"_app/immutable/entry/app.DG5625A-.js",imports:["_app/immutable/entry/start.Cga2oRqd.js","_app/immutable/chunks/QN5gJiTU.js","_app/immutable/chunks/DzLxjRAp.js","_app/immutable/chunks/DIeogL5L.js","_app/immutable/chunks/CUAGXukK.js","_app/immutable/chunks/KaDw971J.js","_app/immutable/chunks/BGKcGItD.js","_app/immutable/entry/app.DG5625A-.js","_app/immutable/chunks/DzLxjRAp.js","_app/immutable/chunks/DIeogL5L.js","_app/immutable/chunks/CRDblv9v.js","_app/immutable/chunks/nxxMPMlL.js","_app/immutable/chunks/B9QI8j-U.js","_app/immutable/chunks/DigXLuHG.js","_app/immutable/chunks/CWj6FrbW.js","_app/immutable/chunks/XNcYlZy4.js","_app/immutable/chunks/C670VDik.js","_app/immutable/chunks/D-jRvTjg.js","_app/immutable/chunks/BUZE7XSo.js","_app/immutable/chunks/CUAGXukK.js","_app/immutable/chunks/BGKcGItD.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
 		nodes: [
 			__memo(() => import('./nodes/0.js')),
 			__memo(() => import('./nodes/1.js')),

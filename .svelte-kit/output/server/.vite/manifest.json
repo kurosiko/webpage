@@ -78,10 +78,6 @@
       "_internal.js"
     ]
   },
-  "src/assets/font/Jersey15-Regular.ttf": {
-    "file": "_app/immutable/assets/Jersey15-Regular.Xlxx0Zur.ttf",
-    "src": "src/assets/font/Jersey15-Regular.ttf"
-  },
   "src/routes/+error.svelte": {
     "file": "entries/pages/_error.svelte.js",
     "name": "entries/pages/_error.svelte",
@@ -104,10 +100,7 @@
       "_Link.js"
     ],
     "css": [
-      "_app/immutable/assets/_layout.BbPBPbeJ.css"
-    ],
-    "assets": [
-      "_app/immutable/assets/Jersey15-Regular.Xlxx0Zur.ttf"
+      "_app/immutable/assets/_layout.FtP0pZ23.css"
     ]
   },
   "src/routes/+page.svelte": {
