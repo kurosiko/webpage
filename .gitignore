@@ -26,4 +26,3 @@ src/asset/
 *.sw?
 *.yaml
 
-wrangler.toml
