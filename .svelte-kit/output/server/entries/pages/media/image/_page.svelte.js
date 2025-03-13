@@ -22,27 +22,23 @@ function _page($$payload, $$props) {
     let item = each_array[$$index];
     if (item.url) {
       $$payload.out += "<!--[-->";
-      $$payload.out += `<div class="group relative"><img class="object-cover"${attr("src", `https://pbs.twimg.com/media/${item.url}`)}${attr("alt", item.url)}> <div class="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 m-auto transition-all flex flex-col [&amp;>*]:flex-auto [&amp;>*]:border-2 [&amp;>*]:w-full [&amp;>*]:border-pink-300 [&amp;>*]:mb-[-1px] justify-center text-center items-center">`;
-      if (item.tweet) {
+      $$payload.out += `<div class="group relative"><img class="object-cover w-full"${attr("src", `https://pbs.twimg.com/media/${item.url}`)}${attr("alt", item.url)}> <div class="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 m-auto transition-all flex flex-col [&amp;>*]:flex-auto [&amp;>*]:border-2 [&amp;>*]:w-full [&amp;>*]:mb-[-1px] justify-center text-center items-center">`;
+      if (item.tweet && item.user) {
         $$payload.out += "<!--[-->";
-        $$payload.out += `<a${attr("href", `https://twitter.com/${item.user}`)} target="_blank">Profile</a>`;
+        $$payload.out += `<button></button>`;
       } else {
         $$payload.out += "<!--[!-->";
-        $$payload.out += `<p>Profile link not found</p>`;
-      }
-      $$payload.out += `<!--]--> `;
-      if (item.user && item.tweet) {
-        $$payload.out += "<!--[-->";
-        $$payload.out += `<a${attr("href", `https://twitter.com/${item.user}/status/${item.tweet}`)} target="_blank">Tweet</a>`;
-      } else {
-        $$payload.out += "<!--[!-->";
-        $$payload.out += `<p>Tweet link not found</p>`;
+        $$payload.out += `<p>src not found</p>`;
       }
       $$payload.out += `<!--]--></div></div>`;
     } else {
       $$payload.out += "<!--[!-->";
     }
     $$payload.out += `<!--]-->`;
+  }
+  $$payload.out += `<!--]--> `;
+  {
+    $$payload.out += "<!--[!-->";
   }
   $$payload.out += `<!--]--></div>`;
   pop();

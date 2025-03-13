@@ -4,18 +4,17 @@
         user:string,
         tweet:string
     }
-    export { data };
+    let detail:()=>void;
+    export { data ,detail};
 </script>
-<div class="fixed bg-black/50 inset-0 z-200 m-auto">
-    <img src={data.url} alt={`${data.url},${data.tweet},${data.user}`} class="h-full object-scale-down m-auto"/>
-    <div class="relative top-[-50px]">
-        <!--
-        <p>{data.url}</p>
-        <p>{data.tweet}</p>
-        <p>{data.user}</p>
-        -->
-        <p>TESt</p>
-        <p>TEStTEXT</p>
-    </div>
-    <slot/>
+<div class="fixed bg-black/50 inset-0 z-200 m-auto backdrop-blur-md">
+        <button class="flex h-full w-full" on:click={detail}>
+            <blockquote class="twitter-tweet" data-theme="dark" data-align="center">
+            <!-- svelte-ignore a11y_consider_explicit_label -->
+            <!-- svelte-ignore element_invalid_self_closing_tag -->
+            <a href={`https://twitter.com/${data.user}/status/${data.tweet}`}/>
+            </blockquote>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </button>
+    
 </div>

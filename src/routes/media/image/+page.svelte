@@ -17,6 +17,19 @@
     let rand:boolean = true
     let grid :number = 5
     let grid_auto :boolean = false
+    let detail :boolean = false;
+    let close_popup:()=>void = ()=>{
+        detail = false
+    }
+    let detail_data:{
+        url:string,
+        user:string,
+        tweet:string
+    } = {
+        url:"",
+        user:"",
+        tweet:""
+    }
     const fetch_eternal = () =>{
             setTimeout(async ()=>{
                 if(page.url.pathname !== "/media/image") return
@@ -24,6 +37,7 @@
                 fetch_eternal()
             },30000)
     }
+    
     onMount(()=>{
         ImagesDOM = async ()=>{
         const response = await fetch("https://api.kurosiko.com/get-db",{
@@ -87,26 +101,25 @@
     {#each image as item}
         {#if item.url}
             <div class="group relative">
-                <img class="object-cover" src={`https://pbs.twimg.com/media/${item.url}`} alt={item.url}/>
-                <div class="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 m-auto transition-all flex flex-col [&>*]:flex-auto [&>*]:border-2 [&>*]:w-full [&>*]:border-pink-300 [&>*]:mb-[-1px] justify-center text-center items-center">
-                    {#if item.tweet}
-                        <a href={`https://twitter.com/${item.user}`} target="_blank">Profile</a>
+                <img class="object-cover w-full" src={`https://pbs.twimg.com/media/${item.url}`} alt={item.url}/>
+                <div class="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 m-auto transition-all flex flex-col [&>*]:flex-auto [&>*]:border-2 [&>*]:w-full [&>*]:mb-[-1px] justify-center text-center items-center">
+                    {#if item.tweet && item.user}
+                        <!-- svelte-ignore a11y_consider_explicit_label -->
+                        <!-- svelte-ignore element_invalid_self_closing_tag -->
+                        <button on:click={()=>{
+                                detail = true
+                                detail_data = {url:item.url || '',tweet:item.tweet || '' ,user:item.user || ''}
+                        }}/>
                         {:else}
-                        <p>Profile link not found</p>
-                    {/if}
-                    {#if item.user && item.tweet}
-                        <a href={`https://twitter.com/${item.user}/status/${item.tweet}`} target="_blank">Tweet</a>
-                    {:else}
-                        <p>Tweet link not found</p>
+                        <p>src not found</p>
                     {/if}
                 </div>
-                
             </div>
         {/if}
     {/each}
-    <!--
-    <Viewer data={{url: "https://pbs.twimg.com/media/Glrgf9xaYAA6-s5?format=jpg&name=large",user:"seafirefly_",tweet:"1899077035815018837"}}></Viewer>
-    -->
+    {#if detail && detail_data}
+        <Viewer data={detail_data} detail={close_popup}></Viewer>
+    {/if}
 </div>
 
 
