@@ -13,11 +13,27 @@
 
 .logo {
     color: white;
-    font-family: "custom";
+    font-family: "logo";
     font-size: 80px;
 }
 
+.content_title{
+    font-family: "content_title";
+    font-weight: 700;
+    font-size: 30px;
+}
+.content_subtitle{
+    font-family: "content_title";
+    font-weight: 700;
+    font-size: 25px;
+}
+
+@font-face{
+    font-family: "content_title";
+    src: url("/assets/font/Roboto-VariableFont_wdth,wght.ttf") format("truetype");
+}
+
 @font-face {
-    font-family: "custom";
+    font-family: "logo";
     src: url("/assets/font/Jersey15-Regular.ttf") format("truetype");
 }

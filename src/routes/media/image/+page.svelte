@@ -10,7 +10,6 @@
     let ImagesDOM:()=>Promise<void>;
     let PostImage:()=>Promise<void>;
     let DeleteImage:(url:string)=>Promise<void>;
-    let Detail_Show:()=>void;
     let image:response_c[] = [];
     let input = "";
     let limit:number = 20
@@ -68,9 +67,6 @@
                 body:url,
             })
             await ImagesDOM()
-        }
-        Detail_Show = ()=>{
-
         }
         fetch_eternal()
     })
