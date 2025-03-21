@@ -7,8 +7,7 @@
     let hide_warn = false;
 </script>
 <CheckAdult></CheckAdult>
-<div>
-    my recommend media contents→
+<div class="flex *:felx-auto text-center justify-center items-center gap-5 text-2xl font-bold *:p-5 *:hover:text-pink-400 *:transition-all p-2 *:rounded-md">
     <Link href="media/video">Video</Link>
     <Link href="media/image">Image</Link>
 </div>

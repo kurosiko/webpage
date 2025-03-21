@@ -11,7 +11,7 @@
     $: if (player) {
         iframe_list = [...player.children].filter((child): child is HTMLIFrameElement => child.tagName === "DIV");
     }
-    let Jumper: (index: number) => void;
+    let Jumper: (index: number, shouldPlay?: boolean) => void;
     const play = (player:any)=>{
         player?.playVideo()
     }
@@ -25,11 +25,13 @@
         player?.unMute()
     }
     onMount(() => {
-        Jumper = (index: number) => {
+        Jumper = (index: number, shouldPlay = true) => {
+            
             is_mute = true
             current_index = index
             const target = iframe_list[index];
             target.scrollIntoView({ behavior: "smooth" });
+            if(!shouldPlay) return
             video_list.forEach((item:any)=>{
                 item.player.stopVideo()
             })
@@ -44,12 +46,22 @@
             return 0;
         });
     }
+    window.addEventListener("resize",()=>{
+        Jumper(current_index,false)
+    })
+
 </script>
 <h1>Here is a test page</h1>
+<h1>I replaced iframe tag with iframe player api</h1>
 <button class="fixed bottom-5 right-5" onclick={()=>{is_mute ? unmute(video_list[current_index].player) : mute(video_list[current_index].player);is_mute = !is_mute}}>{is_mute ? "UnMute" : "Mute"}</button>
-<div class="flex *:flex-auto">
+<div class="flex *:flex-auto *:hover:text-blue-500 text-2xl font-semibold">
     {#each iframe_list as item, i}
-        <button onclick={() => { Jumper(i) }}>{i + 1}</button>
+        {#if i == current_index}
+            <button class=" text-pink-400" onclick={() => { Jumper(i) }}>{i + 1}</button>
+            {:else}
+            <button class="text-white/50" onclick={() => { Jumper(i) }}>{i + 1}</button>
+        {/if}
+        
     {/each}
 </div>
 <div class="fixed inset-0 z-[-1]" id="wapper"></div>
@@ -57,7 +69,7 @@
     {#each video_asset as item,i}
         <div class="relative">
             <div class="absolute top-[50%] left-[1em] text-black">
-                <h1 class="font-bold text-9xl">{item.title}</h1>
+                <h1 class="font-bold text-9xl text-blance">{item.title}</h1>
             </div>
             <button class="h-full w-full" aria-label={`Play video titled ${item.title}`}>
                 <YtPlayer id={item.video} index={i} is_mute={is_mute} on:ready={player_handle}></YtPlayer>
@@ -65,3 +77,4 @@
         </div>
     {/each}
 </div>
+

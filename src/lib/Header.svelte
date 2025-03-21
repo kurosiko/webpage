@@ -8,7 +8,7 @@
         const l = Math.floor(Math.random() * 30) + 70; // 70% to 100% lightness
         return `hsl(${h}, ${s}%, ${l}%)`;
     }
-    let bg_transparent = $props();
+    let {bg_transparent = false} = $props<{bg_transparent:boolean}>();
     onMount(() => {
     const as = Array.from(document.querySelectorAll('#header ul li a')) as HTMLElement[];
     as.forEach((a: HTMLElement) => {
@@ -22,7 +22,7 @@
     });
     
 </script>
-<style></style>
+
 <header id="header" class="sticky top-0 left-0 z-100">
     <div class="flex px-5 {bg_transparent ? "" : "bg-black/80 backdrop-blur-sm "}">
         <div class="basis-1/2">
