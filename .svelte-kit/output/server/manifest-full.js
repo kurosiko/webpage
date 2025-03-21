@@ -7,10 +7,10 @@ function __memo(fn) {
 return {
 	appDir: "_app",
 	appPath: "_app",
-	assets: new Set(["assets/font/Jersey15-Regular.ttf","assets/logo.png"]),
+	assets: new Set(["assets/font/Jersey15-Regular.ttf","assets/font/Roboto-VariableFont_wdth,wght.ttf","assets/lamunation.png","assets/logo.png"]),
 	mimeTypes: {".ttf":"font/ttf",".png":"image/png"},
 	_: {
-		client: {start:"_app/immutable/entry/start.DSobzPBt.js",app:"_app/immutable/entry/app.CZRkZPqn.js",imports:["_app/immutable/entry/start.DSobzPBt.js","_app/immutable/chunks/Ca2jStNv.js","_app/immutable/chunks/COUZ8-z6.js","_app/immutable/chunks/DIeogL5L.js","_app/immutable/chunks/DGCl-Fr1.js","_app/immutable/chunks/jaP-fC8n.js","_app/immutable/chunks/Dp7Xd_KZ.js","_app/immutable/entry/app.CZRkZPqn.js","_app/immutable/chunks/COUZ8-z6.js","_app/immutable/chunks/DIeogL5L.js","_app/immutable/chunks/CGGbK_rP.js","_app/immutable/chunks/DoeZhbiU.js","_app/immutable/chunks/DVPvwRl_.js","_app/immutable/chunks/DGCl-Fr1.js","_app/immutable/chunks/B8t1Mn1I.js","_app/immutable/chunks/CWj6FrbW.js","_app/immutable/chunks/C0goLzWD.js","_app/immutable/chunks/35n5RWcI.js","_app/immutable/chunks/m68JhT5u.js","_app/immutable/chunks/Dp7Xd_KZ.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
+		client: {start:"_app/immutable/entry/start.RBrsi43u.js",app:"_app/immutable/entry/app.Dle5l-tX.js",imports:["_app/immutable/entry/start.RBrsi43u.js","_app/immutable/chunks/7l8AsNPg.js","_app/immutable/chunks/Dd4iVm2f.js","_app/immutable/chunks/Bht5SLqx.js","_app/immutable/chunks/BS-E1QM5.js","_app/immutable/chunks/Bfxa0Tvg.js","_app/immutable/entry/app.Dle5l-tX.js","_app/immutable/chunks/Bht5SLqx.js","_app/immutable/chunks/CWj6FrbW.js","_app/immutable/chunks/B1kXKHkC.js","_app/immutable/chunks/DF35C1Zg.js","_app/immutable/chunks/2GwkvFBd.js","_app/immutable/chunks/CxZZTNPy.js","_app/immutable/chunks/BS-E1QM5.js","_app/immutable/chunks/BnxZ9qG_.js","_app/immutable/chunks/Dd4iVm2f.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
 		nodes: [
 			__memo(() => import('./nodes/0.js')),
 			__memo(() => import('./nodes/1.js')),
@@ -20,7 +20,9 @@ return {
 			__memo(() => import('./nodes/5.js')),
 			__memo(() => import('./nodes/6.js')),
 			__memo(() => import('./nodes/7.js')),
-			__memo(() => import('./nodes/8.js'))
+			__memo(() => import('./nodes/8.js')),
+			__memo(() => import('./nodes/9.js')),
+			__memo(() => import('./nodes/10.js'))
 		],
 		routes: [
 			{
@@ -59,10 +61,24 @@ return {
 				endpoint: null
 			},
 			{
+				id: "/tool",
+				pattern: /^\/tool\/?$/,
+				params: [],
+				page: { layouts: [0,], errors: [1,], leaf: 8 },
+				endpoint: null
+			},
+			{
+				id: "/tool/clipborad",
+				pattern: /^\/tool\/clipborad\/?$/,
+				params: [],
+				page: { layouts: [0,], errors: [1,], leaf: 9 },
+				endpoint: null
+			},
+			{
 				id: "/works",
 				pattern: /^\/works\/?$/,
 				params: [],
-				page: { layouts: [0,], errors: [1,], leaf: 8 },
+				page: { layouts: [0,], errors: [1,], leaf: 10 },
 				endpoint: null
 			}
 		],

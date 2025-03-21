@@ -1,12 +1,6 @@
-import { _ as ensure_array_like, S as pop, T as stringify, P as push } from "../../../../chunks/index.js";
-import { u as updated, s as stores } from "../../../../chunks/client.js";
+import { $ as ensure_array_like, S as pop, T as stringify, P as push } from "../../../../chunks/index.js";
+import "../../../../chunks/client2.js";
 import { a as attr } from "../../../../chunks/attributes.js";
-({
-  get current() {
-    return updated.current;
-  },
-  check: stores.updated.check
-});
 function _page($$payload, $$props) {
   push();
   let image = [];

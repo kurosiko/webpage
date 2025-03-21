@@ -1,5 +1,5 @@
 import "clsx";
-const BROWSER = false;
+const DEV = false;
 var is_array = Array.isArray;
 var index_of = Array.prototype.indexOf;
 var array_from = Array.from;
@@ -11,6 +11,15 @@ function run_all(arr) {
   for (var i = 0; i < arr.length; i++) {
     arr[i]();
   }
+}
+function fallback(value, fallback2, lazy = false) {
+  return value === void 0 ? lazy ? (
+    /** @type {() => V} */
+    fallback2()
+  ) : (
+    /** @type {V} */
+    fallback2
+  ) : value;
 }
 const DERIVED = 1 << 1;
 const EFFECT = 1 << 2;
@@ -676,8 +685,8 @@ function update_effect(effect2) {
     effect2.wv = write_version;
     var deps = effect2.deps;
     var dep;
-    if (BROWSER && tracing_mode_flag && (effect2.f & DIRTY) !== 0 && deps !== null) ;
-    if (BROWSER) ;
+    if (DEV && tracing_mode_flag && (effect2.f & DIRTY) !== 0 && deps !== null) ;
+    if (DEV) ;
   } catch (error) {
     handle_error(error, effect2, previous_effect, previous_component_context || effect2.ctx);
   } finally {
@@ -952,15 +961,21 @@ function render(component, options = {}) {
   payload.out += BLOCK_CLOSE;
   for (const cleanup of on_destroy) cleanup();
   on_destroy = prev_on_destroy;
-  let head = payload.head.out + payload.head.title;
+  let head2 = payload.head.out + payload.head.title;
   for (const { hash, code } of payload.css) {
-    head += `<style id="${hash}">${code}</style>`;
+    head2 += `<style id="${hash}">${code}</style>`;
   }
   return {
-    head,
+    head: head2,
     html: payload.out,
     body: payload.out
   };
+}
+function head(payload, fn) {
+  const head_payload = payload.head;
+  head_payload.out += BLOCK_OPEN;
+  fn(head_payload);
+  head_payload.out += BLOCK_CLOSE;
 }
 function stringify(value) {
   return typeof value === "string" ? value : value == null ? "" : value + "";
@@ -1003,16 +1018,17 @@ function bind_props(props_parent, props_now) {
   }
 }
 function ensure_array_like(array_like_or_iterator) {
-  {
+  if (array_like_or_iterator) {
     return array_like_or_iterator.length !== void 0 ? array_like_or_iterator : Array.from(array_like_or_iterator);
   }
+  return [];
 }
 export {
-  noop as $,
+  ensure_array_like as $,
   component_root as A,
-  BROWSER as B,
+  BLOCK_EFFECT as B,
   CLEAN as C,
-  DIRTY as D,
+  DEV as D,
   create_text as E,
   branch as F,
   push$1 as G,
@@ -1034,13 +1050,15 @@ export {
   getContext as W,
   store_get as X,
   unsubscribe_stores as Y,
-  bind_props as Z,
-  ensure_array_like as _,
-  DERIVED as a,
-  schedule_effect as b,
-  active_reaction as c,
-  is_runes as d,
-  BLOCK_EFFECT as e,
+  head as Z,
+  bind_props as _,
+  DIRTY as a,
+  noop as a0,
+  fallback as a1,
+  DERIVED as b,
+  schedule_effect as c,
+  active_reaction as d,
+  is_runes as e,
   derived_sources as f,
   state_unsafe_mutation as g,
   active_effect as h,

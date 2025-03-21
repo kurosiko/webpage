@@ -33,6 +33,13 @@
       "_index.js"
     ]
   },
+  "_client2.js": {
+    "file": "chunks/client2.js",
+    "name": "client",
+    "imports": [
+      "_client.js"
+    ]
+  },
   "_equality.js": {
     "file": "chunks/equality.js",
     "name": "equality"
@@ -97,10 +104,12 @@
     "imports": [
       "_index.js",
       "_attributes.js",
-      "_Link.js"
+      "_Link.js",
+      "_client.js",
+      "_client2.js"
     ],
     "css": [
-      "_app/immutable/assets/_layout.RQemHOIe.css"
+      "_app/immutable/assets/_layout.Bsy8Jzk0.css"
     ]
   },
   "src/routes/+page.svelte": {
@@ -113,11 +122,7 @@
     "file": "entries/pages/ahoge/_page.svelte.js",
     "name": "entries/pages/ahoge/_page.svelte",
     "src": "src/routes/ahoge/+page.svelte",
-    "isEntry": true,
-    "imports": [
-      "_index.js",
-      "_escaping.js"
-    ]
+    "isEntry": true
   },
   "src/routes/media/+layout.svelte": {
     "file": "entries/pages/media/_layout.svelte.js",
@@ -143,7 +148,7 @@
     "isEntry": true,
     "imports": [
       "_index.js",
-      "_client.js",
+      "_client2.js",
       "_attributes.js"
     ]
   },
@@ -153,13 +158,37 @@
     "src": "src/routes/media/video/+page.svelte",
     "isEntry": true,
     "imports": [
-      "_Link.js"
+      "_index.js",
+      "_attributes.js",
+      "_escaping.js"
     ]
+  },
+  "src/routes/tool/+page.svelte": {
+    "file": "entries/pages/tool/_page.svelte.js",
+    "name": "entries/pages/tool/_page.svelte",
+    "src": "src/routes/tool/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_escaping.js",
+      "_index.js",
+      "_attributes.js"
+    ]
+  },
+  "src/routes/tool/clipborad/+page.svelte": {
+    "file": "entries/pages/tool/clipborad/_page.svelte.js",
+    "name": "entries/pages/tool/clipborad/_page.svelte",
+    "src": "src/routes/tool/clipborad/+page.svelte",
+    "isEntry": true
   },
   "src/routes/works/+page.svelte": {
     "file": "entries/pages/works/_page.svelte.js",
     "name": "entries/pages/works/_page.svelte",
     "src": "src/routes/works/+page.svelte",
-    "isEntry": true
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_attributes.js",
+      "_escaping.js"
+    ]
   }
 }

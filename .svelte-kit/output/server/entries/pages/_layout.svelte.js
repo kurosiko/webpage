@@ -1,7 +1,9 @@
 import { S as pop, T as stringify, P as push, V as slot } from "../../chunks/index.js";
-import "clsx";
 import { a as attr } from "../../chunks/attributes.js";
 import { L as Link } from "../../chunks/Link.js";
+import "clsx";
+import "../../chunks/client.js";
+import "../../chunks/client2.js";
 function Scrollbar($$payload, $$props) {
   push();
   let bar = 0;
@@ -10,7 +12,8 @@ function Scrollbar($$payload, $$props) {
 }
 function Header($$payload, $$props) {
   push();
-  $$payload.out += `<header id="header" class="sticky top-0 left-0 z-100"><div class="flex bg-black/80 backdrop-blur-sm px-5"><div class="basis-1/2">`;
+  let { bg_transparent = false } = $$props;
+  $$payload.out += `<header id="header" class="sticky top-0 left-0 z-100"><div${attr("class", `flex px-5 ${stringify(bg_transparent ? "" : "bg-black/80 backdrop-blur-sm ")}`)}><div class="basis-1/2">`;
   Link($$payload, {
     href: "",
     children: ($$payload2) => {
@@ -36,9 +39,9 @@ function Header($$payload, $$props) {
   });
   $$payload.out += `<!----></li> <li>`;
   Link($$payload, {
-    href: "ahoge",
+    href: "tool",
     children: ($$payload2) => {
-      $$payload2.out += `<!---->Ahoge`;
+      $$payload2.out += `<!---->Tool`;
     },
     $$slots: { default: true }
   });
@@ -62,14 +65,17 @@ function Logo($$payload) {
   $$payload.out += `<div class="overflow-x-clip rounded-lg border-white border-2 drop-shadow shadow-white break-all text-center m-5"><h1 class="mx-auto shadow-pink-400 [text-shadow:_3px_5px_0_var(--tw-shadow-color)] logo">Honor and revere the Ahoge.</h1></div>`;
 }
 function _layout($$payload, $$props) {
+  push();
+  let bg_transparent = false;
   Logo($$payload);
   $$payload.out += `<!----> `;
-  Header($$payload);
+  Header($$payload, { bg_transparent });
   $$payload.out += `<!----> <div class="main_body m-5 p-10 rounded-lg border-white border-2 box-border overflow-hidden"><!---->`;
   slot($$payload, $$props, "default", {});
   $$payload.out += `<!----></div> `;
   Footer($$payload);
   $$payload.out += `<!---->`;
+  pop();
 }
 export {
   _layout as default

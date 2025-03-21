@@ -1,4 +1,4 @@
-import { S as pop, P as push, V as slot, T as stringify } from "../../../chunks/index.js";
+import { S as pop, P as push, Z as head, V as slot, T as stringify } from "../../../chunks/index.js";
 import "clsx";
 import { L as Link } from "../../../chunks/Link.js";
 import { a as attr } from "../../../chunks/attributes.js";
@@ -12,8 +12,11 @@ function Check_adult($$payload, $$props) {
   pop();
 }
 function _layout($$payload, $$props) {
+  head($$payload, ($$payload2) => {
+    $$payload2.out += `<script src="https://www.youtube.com/iframe_api"><\/script><!---->`;
+  });
   Check_adult($$payload);
-  $$payload.out += `<!----> <div>my recommend media contents→ `;
+  $$payload.out += `<!----> <div class="flex *:felx-auto text-center justify-center items-center gap-5 text-2xl font-bold *:p-5 *:hover:text-pink-400 *:transition-all p-2 *:rounded-md">`;
   Link($$payload, {
     href: "media/video",
     children: ($$payload2) => {
