@@ -3,7 +3,6 @@
     import { onMount } from "svelte";
     import video_asset from "./video"
     import YtPlayer from "$lib/YT_Player.svelte";
-    import { read } from "$app/server";
     let player: HTMLDivElement | null = null;
     let iframe_list: HTMLIFrameElement[] = [];
     let video_list:any[] = [];
