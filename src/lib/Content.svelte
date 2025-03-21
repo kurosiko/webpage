@@ -1,9 +1,13 @@
 <script lang="ts">
-    let title:string = "Title";
-    let subtitle:string = "Subtitle";
-    let image:string = "";
-    let to:string = ""
-    export { title ,subtitle , to}
+    import type { Snippet } from "svelte";
+
+    type Props = {
+        title:string,
+        subtitle:string,
+        image:string,
+        children:Snippet
+    }
+    const {title = "Title",subtitle = "Subtitle",image = "",to="",children} = $props()
 </script>
 
 <a href={to} target="_blank">

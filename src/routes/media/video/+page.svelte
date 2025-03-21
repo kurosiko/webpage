@@ -1,36 +1,67 @@
+
 <script lang="ts">
-
-    import Link from "$lib/Link.svelte";
     import { onMount } from "svelte";
+    import video_asset from "./video"
+    import YtPlayer from "$lib/YT_Player.svelte";
     let player: HTMLDivElement | null = null;
-    let iframe_list:HTMLIFrameElement[] = []
+    let iframe_list: HTMLIFrameElement[] = [];
+    let video_list:any[] = [];
+    let current_index:number = 0
+    let is_mute:boolean = true;
     $: if (player) {
-        iframe_list = [...player.children].filter((child): child is HTMLIFrameElement => child.tagName === "IFRAME")
+        iframe_list = [...player.children].filter((child): child is HTMLIFrameElement => child.tagName === "DIV");
     }
-    let Jumper:(index:number)=>void;
+    let Jumper: (index: number) => void;
+    const play = (player:any)=>{
+        player?.playVideo()
+    }
+    const stop = (player:any)=>{
+        player?.stopVideo()
+    }
+    const mute = (player:any) =>{
+        player?.mute()
+    }
+    const unmute = (player:any) =>{
+        player?.unMute()
+    }
     onMount(() => {
-            Jumper = (index: number) => {
-                iframe_list.forEach((item:HTMLIFrameElement)=>item.removeAttribute("id"))
-                const target = iframe_list[index]
-                target.scrollIntoView({behavior:"smooth"})
-            };
+        Jumper = (index: number) => {
+            is_mute = true
+            current_index = index
+            const target = iframe_list[index];
+            target.scrollIntoView({ behavior: "smooth" });
+            video_list.forEach((item:any)=>{
+                item.player.stopVideo()
+            })
+            play(video_list[index].player)
+        };
+    });
+    const player_handle = (event:CustomEvent)=>{
+        video_list.push(event.detail)
+        video_list.sort((item: any, next_item: any) => {
+            if (item.index > next_item.index) return 1;
+            if (item.index < next_item.index) return -1;
+            return 0;
         });
+    }
 </script>
-<h1>Here is the test page</h1>
+<h1>Here is a test page</h1>
+<button class="fixed bottom-5 right-5" onclick={()=>{is_mute ? unmute(video_list[current_index].player) : mute(video_list[current_index].player);is_mute = !is_mute}}>{is_mute ? "UnMute" : "Mute"}</button>
 <div class="flex *:flex-auto">
-{#each iframe_list as item,i}
-    <button on:click={()=>{Jumper(i)}}>{i+1}</button>
-{/each}
+    {#each iframe_list as item, i}
+        <button onclick={() => { Jumper(i) }}>{i + 1}</button>
+    {/each}
 </div>
-<div class="flex *:flex-auto text-center">
-
+<div class="fixed inset-0 z-[-1]" id="wapper"></div>
+<div class="fixed inset-0 overflow-x-scroll aspect-video snap-x snap-mandatory [&>iframe]:aspect-video [&>iframe]:snap-center gap-10 z-[-2] scroll-smooth brightness-50 [&>*]:w-full [&>*]:h-full" bind:this={player}>
+    {#each video_asset as item,i}
+        <div class="relative">
+            <div class="absolute top-[50%] left-[1em] text-black">
+                <h1 class="font-bold text-9xl">{item.title}</h1>
+            </div>
+            <button class="h-full w-full" aria-label={`Play video titled ${item.title}`}>
+                <YtPlayer id={item.video} index={i} is_mute={is_mute} on:ready={player_handle}></YtPlayer>
+            </button>
+        </div>
+    {/each}
 </div>
-<div class="fixed inset-0 flex overflow-x-scroll aspect-video snap-x  snap-mandatory [&>iframe]:aspect-video [&>iframe]:snap-center gap-10 z-[-1] scroll-smooth brightness-50" bind:this={player}>
-        <iframe class="h-full w-full" src="https://www.youtube.com/embed/rDnKUUPl1Jo?si=wOJ4yV7Tc31YehxC?&amp;controls=1&amp;showinfo=0&amp;rel=0&amp;loop=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        <iframe class="h-full w-full" src="https://www.youtube.com/embed/S4aDDVBcahs?si=9iezTsFHlAgfds-A?&amp;controls=1&amp;showinfo=0&amp;rel=0&amp;loop=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        <iframe class="h-full w-full" src="https://www.youtube.com/embed/geqmu1xF4Ns?si=mA12-En2Q_YN0DJo?&amp;controls=1&amp;showinfo=0&amp;rel=0&amp;loop=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        <iframe class="h-full w-full" src="https://www.youtube.com/embed/t0EF64SW3bs?si=_DWRwdhaUCdqiuU_?&amp;controls=1&amp;showinfo=0&amp;rel=0&amp;loop=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        <iframe class="h-full w-full" src="https://www.youtube.com/embed/pMbEHivhFvM?si=cMw4LUIbcZD0sz8s?&amp;controls=1&amp;showinfo=0&amp;rel=0&amp;loop=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        <img src="" alt="ahoge"/>
-</div>
-

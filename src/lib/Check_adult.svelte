@@ -23,8 +23,8 @@
         <label for="age-confirmation">This page contains R-18 contents.</label>
         <label for="age-confirmation">Are you over 18?</label>
         <div class="flex [&>*]:flex-auto">
-            <button on:click={adult}>Yes</button>
-            <button on:click={kid}>No</button>
+            <button onclick={adult}>Yes</button>
+            <button onclick={kid}>No</button>
         </div>
     </div>
     </div>

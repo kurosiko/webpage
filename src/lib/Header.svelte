@@ -2,15 +2,13 @@
     import { onMount } from "svelte";
     import Scrollbar from "./Scrollbar.svelte";
     import Link from "./Link.svelte";
-    import { page } from "$app/state";
-    import { onNavigate } from "$app/navigation";
     function getRandomColor() {
         const h = Math.floor(Math.random() * 360);
         const s = Math.floor(Math.random() * 30) + 70; // 50% to 100% saturation
         const l = Math.floor(Math.random() * 30) + 70; // 70% to 100% lightness
         return `hsl(${h}, ${s}%, ${l}%)`;
     }
-    let bg_transparent =false;
+    let bg_transparent = $props();
     onMount(() => {
     const as = Array.from(document.querySelectorAll('#header ul li a')) as HTMLElement[];
     as.forEach((a: HTMLElement) => {
@@ -23,7 +21,6 @@
     });
     });
     
-    export {bg_transparent}
 </script>
 <style></style>
 <header id="header" class="sticky top-0 left-0 z-100">

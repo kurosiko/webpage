@@ -9,7 +9,11 @@ export default {
             precompress: false,
             fallback: "index.html",
             strict: true,
+            
         }),
     },
+    compilerOptions: {
+        customElement: true
+    }
 };
 

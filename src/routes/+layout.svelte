@@ -3,15 +3,18 @@
   import Footer from '$lib/Footer.svelte';
   import Logo from '$lib/Logo.svelte';
   import "../app.css"
-  import { afterNavigate, onNavigate } from '$app/navigation';
-    import { page } from '$app/state';
+  import { afterNavigate} from '$app/navigation';
+  import { page } from '$app/state';
+  import { onMount } from 'svelte';
   const exception = ["/media/video"]
   let bg_transparent = false
   afterNavigate(()=>{
     bg_transparent = exception.some((item:string)=>page.url.pathname === item)
   })
+  onMount(()=>{
+    bg_transparent = exception.some((item:string)=>page.url.pathname === item)
+  })
 </script>
-
 <Logo/>
 <Header bg_transparent={bg_transparent}/>
 

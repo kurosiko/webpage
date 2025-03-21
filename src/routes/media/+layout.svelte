@@ -1,5 +1,7 @@
+<svelte:head>
+    <script src="https://www.youtube.com/iframe_api"></script>
+</svelte:head>
 <script>
-
     import CheckAdult from "$lib/Check_adult.svelte";
     import Link from "$lib/Link.svelte";
     let hide_warn = false;
@@ -14,7 +16,7 @@
     <p>!!WARN!!!!</p>
     <p>These are not my creations</p>
     <p>I have no permission from their creators</p>
-    <button class="border-2 border-amber-50 rounded-md p-2 bg-black" on:click={()=>hide_warn = !hide_warn}>Hide warning message</button>
+    <button class="border-2 border-amber-50 rounded-md p-2 bg-black" onclick={()=>hide_warn = !hide_warn}>Hide warning message</button>
     <p>(In DEV)</p>
 </div>
 <slot/>

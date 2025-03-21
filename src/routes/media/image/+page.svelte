@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {page} from "$app/state";
+    import { page } from "$app/state";
     import Viewer from "$lib/Viewer.svelte";
     import { onMount } from "svelte";
     interface response_c{
@@ -12,8 +12,8 @@
     let DeleteImage:(url:string)=>Promise<void>;
     let image:response_c[] = [];
     let input = "";
-    let limit:number = 20
-    let rand:boolean = true
+    let limit:number = 20;
+    let rand:boolean = true;
     let grid :number = 5
     let grid_auto :boolean = false
     let detail :boolean = false;
@@ -75,7 +75,7 @@
 <svelte:component this={ImagesDOM} />
 
 <div class="p-2 flex gap-5">
-    <button on:click={PostImage} class="p-2 border-pink-300 border-2 border-double rounded-sm hover:border-blue-400 transition-all">Submit</button>
+    <button onclick={PostImage} class="p-2 border-pink-300 border-2 border-double rounded-sm hover:border-blue-400 transition-all">Submit</button>
     <div class="relative">
         <input bind:value={input} type="text" class="peer bg-transparent h-10 w-72 rounded-lg text-gray-200 placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600" placeholder="Type inside me"/><label for="username" class="absolute cursor-text left-0 -top-3 text-sm text-gray-500 bg-inherit mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all">Enter a link</label>
     </div>
@@ -89,7 +89,7 @@
         <div>Grid</div>
         <input type="number" bind:value={grid}>
     </div>
-    <button on:click={ImagesDOM} class="p-2 border-pink-300 border-2 border-double rounded-sm hover:border-blue-400 transition-all">Reload</button>
+    <button onclick={ImagesDOM} class="p-2 border-pink-300 border-2 border-double rounded-sm hover:border-blue-400 transition-all">Reload</button>
 </div>
 
 
@@ -102,7 +102,7 @@
                     {#if item.tweet && item.user}
                         <!-- svelte-ignore a11y_consider_explicit_label -->
                         <!-- svelte-ignore element_invalid_self_closing_tag -->
-                        <button on:click={()=>{
+                        <button onclick={()=>{
                                 detail = true
                                 detail_data = {url:item.url || '',tweet:item.tweet || '' ,user:item.user || ''}
                         }}/>
