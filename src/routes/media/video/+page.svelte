@@ -3,11 +3,13 @@
     import { onMount } from "svelte";
     import video_asset from "./video"
     import YtPlayer from "$lib/YT_Player.svelte";
+    import { read } from "$app/server";
     let player: HTMLDivElement | null = null;
     let iframe_list: HTMLIFrameElement[] = [];
     let video_list:any[] = [];
     let current_index:number = 0
     let is_mute:boolean = true;
+    let ready:boolean = false;
     $: if (player) {
         iframe_list = [...player.children].filter((child): child is HTMLIFrameElement => child.tagName === "DIV");
     }
@@ -26,7 +28,9 @@
     }
     onMount(() => {
         Jumper = (index: number, shouldPlay = true) => {
-            
+            if(index + 1 > video_list.length){
+                index = 0
+            }
             is_mute = true
             current_index = index
             const target = iframe_list[index];
@@ -39,6 +43,7 @@
         };
     });
     const player_handle = (event:CustomEvent)=>{
+        ready = true
         video_list.push(event.detail)
         video_list.sort((item: any, next_item: any) => {
             if (item.index > next_item.index) return 1;
@@ -72,7 +77,7 @@
                 <h1 class="font-bold text-9xl text-blance">{item.title}</h1>
             </div>
             <button class="h-full w-full" aria-label={`Play video titled ${item.title}`}>
-                <YtPlayer id={item.video} index={i} is_mute={is_mute} on:ready={player_handle}></YtPlayer>
+                <YtPlayer id={item.video} index={i} is_mute={is_mute} on:ready={player_handle} on:end={()=>{Jumper(current_index+1)}}></YtPlayer>
             </button>
         </div>
     {/each}

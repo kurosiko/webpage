@@ -51,7 +51,12 @@ const video_asset: {
     {
         title: "Select Oblige",
         video: "a2vF1yN7lF8",
-        src:null
+        src: null,
+    },
+    {
+        title: "LAMUNATION",
+        video: "f7oWqUM-tQ0",
+        src: null
     },
 ];
 
