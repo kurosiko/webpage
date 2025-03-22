@@ -33,7 +33,6 @@
         });
        }}
     onMount(() => {
-        windowRef = window
         def_player()
         
     });
