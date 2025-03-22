@@ -11,8 +11,8 @@ node_modules
 
 dist-ssr
 *.local
-.svelte-kit
-.wrangler
+/.svelte-kit/
+/.wrangler/
 
 # Editor directories and files
 .vscode/*
