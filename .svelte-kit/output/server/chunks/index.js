@@ -1,4 +1,4 @@
-import "clsx";
+import { clsx as clsx$1 } from "clsx";
 const BROWSER = false;
 var is_array = Array.isArray;
 var index_of = Array.prototype.indexOf;
@@ -11,6 +11,9 @@ var get_prototype_of = Object.getPrototypeOf;
 var is_extensible = Object.isExtensible;
 const noop = () => {
 };
+function is_promise(value) {
+  return typeof value?.then === "function";
+}
 function run_all(arr) {
   for (var i = 0; i < arr.length; i++) {
     arr[i]();
@@ -1248,6 +1251,13 @@ function attr(name, value, is_boolean = false) {
   const assignment = is_boolean ? "" : `="${escape_html(normalized, true)}"`;
   return ` ${name}${assignment}`;
 }
+function clsx(value) {
+  if (typeof value === "object") {
+    return clsx$1(value);
+  } else {
+    return value ?? "";
+  }
+}
 function to_class(value, hash, directives) {
   var classname = value == null ? "" : "" + value;
   return classname === "" ? null : classname;
@@ -1406,6 +1416,13 @@ function bind_props(props_parent, props_now) {
     }
   }
 }
+function await_block(promise, pending_fn, then_fn) {
+  if (is_promise(promise)) {
+    promise.then(null, noop);
+  } else if (then_fn !== null) {
+    then_fn(promise);
+  }
+}
 function ensure_array_like(array_like_or_iterator) {
   if (array_like_or_iterator) {
     return array_like_or_iterator.length !== void 0 ? array_like_or_iterator : Array.from(array_like_or_iterator);
@@ -1432,7 +1449,9 @@ export {
   ensure_array_like as Q,
   noop as R,
   safe_not_equal as S,
-  fallback as T,
+  await_block as T,
+  clsx as U,
+  fallback as V,
   set_active_effect as a,
   active_reaction as b,
   active_effect as c,

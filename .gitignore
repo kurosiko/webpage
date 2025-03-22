@@ -29,8 +29,6 @@ dist-ssr
 .prettierrc
 
 **/lamunation.png
-
-wrangler.toml
 *.sql
 
 
