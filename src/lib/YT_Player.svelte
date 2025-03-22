@@ -1,10 +1,15 @@
 <script lang="ts">
-    import { createEventDispatcher, onMount} from 'svelte';
-    const { id = 'M7lc1UVf-VE',index,is_mute} = $props<{id:string,index:number,is_mute:boolean}>();
+    import { onMount} from 'svelte';
+    type Props = {
+        id:string,
+        index:number,
+        is_mute:boolean,
+        ok: (args:{player:any,index:number}) => void,
+        end:()=>void
+    }
+    const { id = 'M7lc1UVf-VE',index = 0,is_mute = true,ok,end = ()=>{}}:Props = $props();
     let videoId = id;
     let player: any;
-    let volume:number = 50    
-    const dispatch = createEventDispatcher()
     let windowRef:any;
     const def_player:()=>void = ()=>{
        if (typeof windowRef.YT != 'undefined') {
@@ -22,11 +27,11 @@
             },
             events:{
                 onReady: (event: any) => {
-                    dispatch("ready", {player:event.target,index:index});
+                    ok({player:event.target,index:index});
                 },
                 onStateChange:(event:any)=>{
                     if(event.data == 0){
-                        dispatch("end")
+                        end()
                     }
                 }
             }

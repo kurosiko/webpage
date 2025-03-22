@@ -16,5 +16,5 @@
 </script>
 
 <div class="bg-white w-full h-1 transition-all" >
-    <div class="bg-pink-300 h-1 transition-all" style="width: {bar}%;"/>
+    <div class="bg-pink-300 h-1 transition-all" style="width: {bar}%;"></div>
 </div>

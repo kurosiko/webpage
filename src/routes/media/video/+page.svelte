@@ -1,36 +1,32 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import YtPlayer from "$lib/YT_Player.svelte";
-
-    let bg_player: HTMLDivElement | null = null;
+    let bg_player: HTMLDivElement | null = $state(null);
     let iframe_list: HTMLIFrameElement[] = [];
     let video_list: any[] = [];
-    let current_index = 0;
-    let is_mute = true;
+    let current_index = $state(0);
+    let is_mute = $state(true);
     let ready = false;
-
     type Response_Video = {
         title: string;
         src: string;
         link: string | null;
     };
-
-    $: if (bg_player) {
-        iframe_list = Array.from(bg_player.children).filter(
-            (child): child is HTMLIFrameElement => child.tagName === "DIV"
-        );
-    }
-
+    $effect(()=>{
+        if (bg_player) {
+            iframe_list = Array.from(bg_player.children).filter(
+                (child): child is HTMLIFrameElement => child.tagName === "DIV"
+            );
+        }
+    })
     const play = (player: any) => player?.playVideo();
     const stop = (player: any) => player?.stopVideo();
     const mute = (player: any) => player?.mute();
     const unmute = (player: any) => player?.unMute();
-
     const toggleMute = () => {
         video_list.forEach((item: any) => (is_mute ? unmute(item.player) : mute(item.player)));
         is_mute = !is_mute;
     };
-
     let Jumper: (index: number, shouldPlay?: boolean) => void;
 
     onMount(() => {
@@ -50,11 +46,11 @@
         window.addEventListener("resize", () => Jumper(current_index, false));
     });
 
-    const player_handle = (event: CustomEvent) => {
+    const player_handle = (event: {player:any,index:number}) => {
         ready = true;
-        video_list.push(event.detail);
+        video_list.push(event);
         video_list.sort((a: any, b: any) => a.index - b.index);
-        if(event.detail.index == 0) play(video_list[0].player)
+        if(event.index == 0) play(video_list[0].player)
     };
 </script>
 
@@ -63,7 +59,7 @@
 
 <button
     class="fixed bottom-5 right-5"
-    on:click={toggleMute}
+    onclick={toggleMute}
 >
     {is_mute ? "UnMute" : "Mute"}
 </button>
@@ -73,7 +69,7 @@
         {#each assets as _, i}
             <button
                 class={i === current_index ? "text-pink-400" : "text-white/50"}
-                on:click={() => Jumper(i)}
+                onclick={() => Jumper(i)}
             >
                 {i + 1}
             </button>
@@ -98,8 +94,8 @@
                         id={item.src}
                         index={i}
                         is_mute={is_mute}
-                        on:ready={player_handle}
-                        on:end={() => Jumper(current_index + 1)}
+                        ok={player_handle}
+                        end={() => Jumper(current_index + 1)}
                     />
                 </button>
             </div>

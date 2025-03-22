@@ -1,11 +1,9 @@
 <script lang="ts">
-    import YtPlayer from "$lib/YT_Player_B.svelte";
-    import { onMount } from "svelte";
-    let player:any;
+    import YtPlayer from "$lib/YT_Player.svelte";
     let playerRef:any;
-    const handle = (event: CustomEvent) => {
-        console.log(event)
-        playerRef = event.detail
+    const handle = (event:{player:any,index:number}) => {
+        playerRef = event.player
+        title = playerRef?.videoTitle
     }
     let play = ()=>{
         playerRef?.playVideo()
@@ -22,11 +20,11 @@
     let data = ()=>{
         console.log(playerRef?.showVideoInfo())
     }
-    $:title = playerRef?.videoTitle
+    let {title = "title"} = $props()
 </script>
 
 <div class="grid grid-cols-2">
-    <YtPlayer player={player} id="gcrIuZ20A60" on:ready={handle}></YtPlayer>
+    <YtPlayer id="gcrIuZ20A60" ok={handle} index={0} is_mute={false} end={()=>{play()}}/>
     <div class="grid grid-cols-2">
         <button onclick={play}>Play</button>
         <button onclick={pause}>Stop</button>
