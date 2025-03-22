@@ -1,2 +1,7 @@
 name = "webpage"
 pages_build_output_dir = ".svelte-kit/cloudflare"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "${DB_NAME}"
+database_id = "${DB_ID}"

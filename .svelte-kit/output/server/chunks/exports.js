@@ -1,5 +1,4 @@
-import { a0 as noop } from "./index.js";
-import { a as safe_not_equal } from "./equality.js";
+import { R as noop, S as safe_not_equal } from "./index.js";
 import "clsx";
 const internal = new URL("sveltekit-internal://");
 function resolve(base, path) {

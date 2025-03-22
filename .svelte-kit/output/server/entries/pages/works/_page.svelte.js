@@ -1,7 +1,5 @@
 import "clsx";
-import { V as slot } from "../../../chunks/index.js";
-import { a as attr } from "../../../chunks/attributes.js";
-import { e as escape_html } from "../../../chunks/escaping.js";
+import { O as attr, J as escape_html, G as slot } from "../../../chunks/index.js";
 function Content($$payload, $$props) {
   const {
     title = "Title",

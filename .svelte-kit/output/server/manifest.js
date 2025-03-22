@@ -10,7 +10,7 @@ return {
 	assets: new Set(["assets/font/Jersey15-Regular.ttf","assets/font/Roboto-VariableFont_wdth,wght.ttf","assets/lamunation.png","assets/logo.png"]),
 	mimeTypes: {".ttf":"font/ttf",".png":"image/png"},
 	_: {
-		client: {start:"_app/immutable/entry/start.Bx2PXG6p.js",app:"_app/immutable/entry/app.CJs7jIF_.js",imports:["_app/immutable/entry/start.Bx2PXG6p.js","_app/immutable/chunks/DefGaBfG.js","_app/immutable/chunks/Dd4iVm2f.js","_app/immutable/chunks/Bht5SLqx.js","_app/immutable/chunks/BS-E1QM5.js","_app/immutable/chunks/BsnDdvKJ.js","_app/immutable/entry/app.CJs7jIF_.js","_app/immutable/chunks/Bht5SLqx.js","_app/immutable/chunks/CWj6FrbW.js","_app/immutable/chunks/B1kXKHkC.js","_app/immutable/chunks/DF35C1Zg.js","_app/immutable/chunks/2GwkvFBd.js","_app/immutable/chunks/CxZZTNPy.js","_app/immutable/chunks/BS-E1QM5.js","_app/immutable/chunks/BnxZ9qG_.js","_app/immutable/chunks/Dd4iVm2f.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
+		client: {start:"_app/immutable/entry/start.too9W-FI.js",app:"_app/immutable/entry/app.7uKjpSIc.js",imports:["_app/immutable/entry/start.too9W-FI.js","_app/immutable/chunks/DjMf1lJv.js","_app/immutable/chunks/BKOPFTRZ.js","_app/immutable/chunks/CAOyyBTL.js","_app/immutable/chunks/B1CQrgR_.js","_app/immutable/chunks/B50H9I1l.js","_app/immutable/entry/app.7uKjpSIc.js","_app/immutable/chunks/CAOyyBTL.js","_app/immutable/chunks/CWj6FrbW.js","_app/immutable/chunks/W_KokJe6.js","_app/immutable/chunks/GkQuViUG.js","_app/immutable/chunks/BiWf-tgx.js","_app/immutable/chunks/BHYjgMSy.js","_app/immutable/chunks/DqGiz7f7.js","_app/immutable/chunks/B1CQrgR_.js","_app/immutable/chunks/BKOPFTRZ.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
 		nodes: [
 			__memo(() => import('./nodes/0.js')),
 			__memo(() => import('./nodes/1.js')),
@@ -38,6 +38,13 @@ return {
 				params: [],
 				page: { layouts: [0,], errors: [1,], leaf: 4 },
 				endpoint: null
+			},
+			{
+				id: "/api/video",
+				pattern: /^\/api\/video\/?$/,
+				params: [],
+				page: null,
+				endpoint: __memo(() => import('./entries/endpoints/api/video/_server.ts.js'))
 			},
 			{
 				id: "/media",

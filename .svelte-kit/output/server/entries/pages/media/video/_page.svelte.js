@@ -1,6 +1,4 @@
-import { S as pop, P as push, $ as ensure_array_like } from "../../../../chunks/index.js";
-import { a as attr } from "../../../../chunks/attributes.js";
-import { e as escape_html } from "../../../../chunks/escaping.js";
+import { O as attr, C as pop, z as push, Q as ensure_array_like, J as escape_html } from "../../../../chunks/index.js";
 const video_asset = [
   {
     title: "LAMUNATION 1st",
@@ -62,7 +60,7 @@ function YT_Player($$payload, $$props) {
   push();
   const { id = "M7lc1UVf-VE", index, is_mute } = $$props;
   let videoId = id;
-  $$payload.out += `<div class="w-full h-full transition-all"${attr("id", videoId)}${attr("style", "")}></div>`;
+  $$payload.out += `<div class="w-full h-full transition-all"${attr("id", videoId)}></div>`;
   pop();
 }
 function _page($$payload, $$props) {

@@ -1,5 +1,4 @@
-import { S as pop, T as stringify, P as push, V as slot } from "../../chunks/index.js";
-import { a as attr } from "../../chunks/attributes.js";
+import { D as attr_style, C as pop, z as push, E as stringify, F as attr_class, G as slot } from "../../chunks/index.js";
 import { L as Link } from "../../chunks/Link.js";
 import "clsx";
 import "../../chunks/client.js";
@@ -7,13 +6,13 @@ import "../../chunks/client2.js";
 function Scrollbar($$payload, $$props) {
   push();
   let bar = 0;
-  $$payload.out += `<div class="bg-white w-full h-1 transition-all"><div class="bg-pink-300 h-1 transition-all"${attr("style", `width: ${stringify(bar)}%;`)}></div></div>`;
+  $$payload.out += `<div class="bg-white w-full h-1 transition-all"><div class="bg-pink-300 h-1 transition-all"${attr_style(`width: ${stringify(bar)}%;`)}></div></div>`;
   pop();
 }
 function Header($$payload, $$props) {
   push();
   let { bg_transparent = false } = $$props;
-  $$payload.out += `<header id="header" class="sticky top-0 left-0 z-100"><div${attr("class", `flex px-5 ${stringify(bg_transparent ? "" : "bg-black/80 backdrop-blur-sm ")}`)}><div class="basis-1/2">`;
+  $$payload.out += `<header id="header" class="sticky top-0 left-0 z-100"><div${attr_class(`flex px-5 ${stringify(bg_transparent ? "" : "bg-black/80 backdrop-blur-sm ")}`)}><div class="basis-1/2">`;
   Link($$payload, {
     href: "",
     children: ($$payload2) => {

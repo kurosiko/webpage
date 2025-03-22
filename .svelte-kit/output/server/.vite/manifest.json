@@ -14,15 +14,7 @@
     "name": "Link",
     "imports": [
       "_index.js",
-      "_paths.js",
-      "_attributes.js"
-    ]
-  },
-  "_attributes.js": {
-    "file": "chunks/attributes.js",
-    "name": "attributes",
-    "imports": [
-      "_escaping.js"
+      "_paths.js"
     ]
   },
   "_client.js": {
@@ -40,20 +32,11 @@
       "_client.js"
     ]
   },
-  "_equality.js": {
-    "file": "chunks/equality.js",
-    "name": "equality"
-  },
-  "_escaping.js": {
-    "file": "chunks/escaping.js",
-    "name": "escaping"
-  },
   "_exports.js": {
     "file": "chunks/exports.js",
     "name": "exports",
     "imports": [
-      "_index.js",
-      "_equality.js"
+      "_index.js"
     ]
   },
   "_index.js": {
@@ -65,7 +48,6 @@
     "name": "internal",
     "imports": [
       "_index.js",
-      "_equality.js",
       "_paths.js"
     ]
   },
@@ -92,8 +74,7 @@
     "isEntry": true,
     "imports": [
       "_index.js",
-      "_client.js",
-      "_escaping.js"
+      "_client.js"
     ]
   },
   "src/routes/+layout.svelte": {
@@ -103,7 +84,6 @@
     "isEntry": true,
     "imports": [
       "_index.js",
-      "_attributes.js",
       "_Link.js",
       "_client.js",
       "_client2.js"
@@ -124,6 +104,12 @@
     "src": "src/routes/ahoge/+page.svelte",
     "isEntry": true
   },
+  "src/routes/api/video/+server.ts": {
+    "file": "entries/endpoints/api/video/_server.ts.js",
+    "name": "entries/endpoints/api/video/_server.ts",
+    "src": "src/routes/api/video/+server.ts",
+    "isEntry": true
+  },
   "src/routes/media/+layout.svelte": {
     "file": "entries/pages/media/_layout.svelte.js",
     "name": "entries/pages/media/_layout.svelte",
@@ -131,8 +117,7 @@
     "isEntry": true,
     "imports": [
       "_index.js",
-      "_Link.js",
-      "_attributes.js"
+      "_Link.js"
     ]
   },
   "src/routes/media/+page.svelte": {
@@ -148,8 +133,7 @@
     "isEntry": true,
     "imports": [
       "_index.js",
-      "_client2.js",
-      "_attributes.js"
+      "_client2.js"
     ]
   },
   "src/routes/media/video/+page.svelte": {
@@ -158,9 +142,7 @@
     "src": "src/routes/media/video/+page.svelte",
     "isEntry": true,
     "imports": [
-      "_index.js",
-      "_attributes.js",
-      "_escaping.js"
+      "_index.js"
     ]
   },
   "src/routes/tool/+page.svelte": {
@@ -169,9 +151,7 @@
     "src": "src/routes/tool/+page.svelte",
     "isEntry": true,
     "imports": [
-      "_escaping.js",
-      "_index.js",
-      "_attributes.js"
+      "_index.js"
     ]
   },
   "src/routes/tool/clipborad/+page.svelte": {
@@ -186,9 +166,7 @@
     "src": "src/routes/works/+page.svelte",
     "isEntry": true,
     "imports": [
-      "_index.js",
-      "_attributes.js",
-      "_escaping.js"
+      "_index.js"
     ]
   }
 }

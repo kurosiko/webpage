@@ -1,4 +1,4 @@
-import { D as DEV } from "./chunks/index.js";
+import { B as BROWSER } from "./chunks/index.js";
 import { a as assets, b as base, o as override, r as reset, c as app_dir } from "./chunks/paths.js";
 import * as devalue from "devalue";
 import { m as make_trackable, d as disable_search, a as decode_params, w as writable, r as readable, n as normalize_path, b as resolve, c as decode_pathname, v as validate_layout_server_exports, e as validate_layout_exports, f as validate_page_server_exports, g as validate_page_exports, h as validate_server_exports } from "./chunks/exports.js";
@@ -2215,7 +2215,7 @@ async function render_page(event, page, options2, manifest, state, resolve_opts)
     state.prerender_default = should_prerender;
     const fetched = [];
     if (get_option(nodes, "ssr") === false && !(state.prerendering && should_prerender_data)) {
-      if (DEV && action_result && !event.request.headers.has("x-sveltekit-action")) ;
+      if (BROWSER && action_result && !event.request.headers.has("x-sveltekit-action")) ;
       return await render_response({
         branch: [],
         fetched,
@@ -2803,12 +2803,12 @@ async function respond(request, options2, manifest, state) {
         trailing_slash = "always";
       } else if (route.page) {
         const nodes = await load_page_nodes(route.page, manifest);
-        if (DEV) ;
+        if (BROWSER) ;
         trailing_slash = get_option(nodes, "trailingSlash");
       } else if (route.endpoint) {
         const node = await route.endpoint();
         trailing_slash = node.trailingSlash;
-        if (DEV) ;
+        if (BROWSER) ;
       }
       if (!is_data_request) {
         const normalized = normalize_path(url.pathname, trailing_slash ?? "never");

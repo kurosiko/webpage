@@ -1,6 +1,9 @@
 {
 	"/": [],
 	"/ahoge": [],
+	"/api/video": [
+		"src/routes/api/video/+server.ts"
+	],
 	"/media": [],
 	"/media/image": [],
 	"/media/video": [],

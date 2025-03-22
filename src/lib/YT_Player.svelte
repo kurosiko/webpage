@@ -5,8 +5,8 @@
     let player: any;
     let volume:number = 50    
     const dispatch = createEventDispatcher()
+    let windowRef:any;
     const def_player:()=>void = ()=>{
-        const windowRef: any = window;
        if (typeof windowRef.YT != 'undefined') {
            player = new windowRef.YT.Player(videoId, {
             videoId,
@@ -23,7 +23,6 @@
             events:{
                 onReady: (event: any) => {
                     dispatch("ready", {player:event.target,index:index});
-                    event.target.setLoop(true)
                 },
                 onStateChange:(event:any)=>{
                     if(event.data == 0){
@@ -33,7 +32,11 @@
             }
         });
        }}
-    onMount(() => {def_player()});
+    onMount(() => {
+        windowRef = window
+        def_player()
+        
+    });
 </script>
 
 <div class="w-full h-full transition-all" id={videoId}></div>

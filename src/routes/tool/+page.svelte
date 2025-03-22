@@ -1,5 +1,6 @@
 <script lang="ts">
     import YtPlayer from "$lib/YT_Player_B.svelte";
+    import { onMount } from "svelte";
     let player:any;
     let playerRef:any;
     const handle = (event: CustomEvent) => {
@@ -22,7 +23,6 @@
         console.log(playerRef?.showVideoInfo())
     }
     $:title = playerRef?.videoTitle
-    
 </script>
 
 <div class="grid grid-cols-2">

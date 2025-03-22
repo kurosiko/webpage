@@ -4,4 +4,9 @@ export default defineConfig({
     plugins: [
         sveltekit(),
     ],
+    server: {
+        watch: {
+            ignored:["**/.wrangler/**"]
+        }
+    }
 });

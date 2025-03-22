@@ -1,5 +1,4 @@
-import { i as increment_write_version, a as DIRTY, s as set_signal_status, C as CLEAN, U as UNOWNED, b as DERIVED, c as schedule_effect, M as MAYBE_DIRTY, d as active_reaction, u as untracking, e as is_runes, B as BLOCK_EFFECT, f as derived_sources, g as state_unsafe_mutation, h as active_effect, j as BRANCH_EFFECT, R as ROOT_EFFECT, k as untracked_writes, l as set_untracked_writes, H as HYDRATION_ERROR, m as get_next_sibling, n as define_property, o as set_active_reaction, p as set_active_effect, q as is_array, r as init_operations, t as get_first_child, v as HYDRATION_START, w as HYDRATION_END, x as hydration_failed, y as clear_text_content, z as array_from, A as component_root, E as create_text, F as branch, G as push, I as pop, J as component_context, K as get, L as LEGACY_PROPS, N as flushSync, O as render, P as push$1, Q as setContext, S as pop$1 } from "./index.js";
-import { s as safe_equals, e as equals } from "./equality.js";
+import { H as HYDRATION_ERROR, g as get_next_sibling, d as define_property, s as set_active_reaction, a as set_active_effect, i as is_array, b as active_reaction, c as active_effect, e as init_operations, f as get_first_child, h as HYDRATION_START, j as HYDRATION_END, k as hydration_failed, l as clear_text_content, m as array_from, n as component_root, o as create_text, p as branch, q as push, r as pop, t as component_context, u as get, L as LEGACY_PROPS, v as set, w as flushSync, x as mutable_source, y as render, z as push$1, A as setContext, C as pop$1 } from "./index.js";
 import "clsx";
 import "./paths.js";
 let public_env = {};
@@ -15,75 +14,6 @@ function set_safe_public_env(environment) {
 function hydration_mismatch(location) {
   {
     console.warn(`https://svelte.dev/e/hydration_mismatch`);
-  }
-}
-function source(v, stack) {
-  var signal = {
-    f: 0,
-    // TODO ideally we could skip this altogether, but it causes type errors
-    v,
-    reactions: null,
-    equals,
-    rv: 0,
-    wv: 0
-  };
-  return signal;
-}
-// @__NO_SIDE_EFFECTS__
-function mutable_source(initial_value, immutable = false) {
-  const s = source(initial_value);
-  if (!immutable) {
-    s.equals = safe_equals;
-  }
-  return s;
-}
-function set(source2, value) {
-  if (active_reaction !== null && !untracking && is_runes() && (active_reaction.f & (DERIVED | BLOCK_EFFECT)) !== 0 && // If the source was created locally within the current derived, then
-  // we allow the mutation.
-  (derived_sources === null || !derived_sources.includes(source2))) {
-    state_unsafe_mutation();
-  }
-  return internal_set(source2, value);
-}
-function internal_set(source2, value) {
-  if (!source2.equals(value)) {
-    source2.v;
-    source2.v = value;
-    source2.wv = increment_write_version();
-    mark_reactions(source2, DIRTY);
-    if (active_effect !== null && (active_effect.f & CLEAN) !== 0 && (active_effect.f & (BRANCH_EFFECT | ROOT_EFFECT)) === 0) {
-      if (untracked_writes === null) {
-        set_untracked_writes([source2]);
-      } else {
-        untracked_writes.push(source2);
-      }
-    }
-  }
-  return value;
-}
-function mark_reactions(signal, status) {
-  var reactions = signal.reactions;
-  if (reactions === null) return;
-  var length = reactions.length;
-  for (var i = 0; i < length; i++) {
-    var reaction = reactions[i];
-    var flags = reaction.f;
-    if ((flags & DIRTY) !== 0) continue;
-    set_signal_status(reaction, status);
-    if ((flags & (CLEAN | UNOWNED)) !== 0) {
-      if ((flags & DERIVED) !== 0) {
-        mark_reactions(
-          /** @type {Derived} */
-          reaction,
-          MAYBE_DIRTY
-        );
-      } else {
-        schedule_effect(
-          /** @type {Effect} */
-          reaction
-        );
-      }
-    }
   }
 }
 let hydrating = false;
@@ -160,7 +90,7 @@ function handle_event_propagation(event) {
       current_target.host || null;
       try {
         var delegated = current_target["__" + event_name];
-        if (delegated !== void 0 && (!/** @type {any} */
+        if (delegated != null && (!/** @type {any} */
         current_target.disabled || // DOM could've been updated already by the time this is reached, so we check this as well
         // -> the target could not have been disabled because it emits the event in the first place
         event.target === current_target)) {
@@ -371,7 +301,7 @@ class Svelte4Component {
   constructor(options2) {
     var sources = /* @__PURE__ */ new Map();
     var add_source = (key, value) => {
-      var s = /* @__PURE__ */ mutable_source(value);
+      var s = mutable_source(value);
       sources.set(key, s);
       return s;
     };
@@ -629,7 +559,7 @@ const options = {
 		<div class="error">
 			<span class="status">` + status + '</span>\n			<div class="message">\n				<h1>' + message + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n"
   },
-  version_hash: "15rcpkl"
+  version_hash: "zafm53"
 };
 async function get_hooks() {
   let handle;

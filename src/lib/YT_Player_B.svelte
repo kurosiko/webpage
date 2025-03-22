@@ -3,9 +3,6 @@
     export let id: string = 'M7lc1UVf-VE';
     $: videoId = id;
     export let player: any;
-    export let Play:()=>void = ()=>{player?.playVideo()};
-    let Pause:()=>void;
-    let volume:number = 50;
     const dispatch = createEventDispatcher()
     onMount(() => {
        const windowRef: any = window;
