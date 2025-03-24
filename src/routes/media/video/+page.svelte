@@ -3,10 +3,10 @@
     import YtPlayer from "$lib/YT_Player.svelte";
     let bg_player: HTMLDivElement | null = $state(null);
     let iframe_list: HTMLIFrameElement[] = [];
-    let video_list: any[] = [];
+    let video_list:{player:any,index:number}[] = []
     let current_index = $state(0);
     let is_mute = $state(true);
-    let ready = false;
+    let ready = $state(false);
     let volume = $state(20);
     type Response_Video = {
         title: string;
@@ -33,25 +33,23 @@
         is_mute = !is_mute;
     };
     let Jumper: (index: number, shouldPlay?: boolean) => void;
-
+    let response = $state<Promise<Response_Video[]>|null>(null);
     onMount(() => {
         Jumper = (index: number, shouldPlay = true) => {
             if (index >= video_list.length) index = 0;
             current_index = index;
-
             const target = iframe_list[index];
             target.scrollIntoView({ behavior: "smooth" });
-
             if (!shouldPlay) return;
-
             video_list.forEach((item: any) => stop(item.player));
             play(video_list[index].player);
+            vol(volume)
         };
-
+        response = fetch("/api/video").then((item:any)=>item.json()).then((videos:Response_Video[])=>videos)
         window.addEventListener("resize", () => Jumper(current_index, false));
     });
 
-    const player_handle = (event: {player:any,index:number}) => {
+    const player_handle = (event: {player:any,index:number}) => {    
         ready = true;
         video_list.push(event);
         video_list.sort((a: any, b: any) => a.index - b.index);
@@ -64,7 +62,7 @@
 <h1>If you have any problem with these contents, please contact me.</h1>
 
 
-<div class="fixed bottom-5 right-5 flex flex-col opacity-50 hover:opacity-100 p-3 group *:rounded-md">
+<div class="fixed bottom-5 right-5 flex flex-col opacity-50 hover:opacity-100 p-3 group [&>*]:rounded-md rounded-md">
     <button onclick={toggleMute}>{is_mute ? "UnMute" : "Mute"}</button>
     <div>
         Vol
@@ -77,41 +75,50 @@
 </div>
 
 
-{#await fetch("/api/video").then((res) => res.json()).then((videos: Response_Video[]) => videos) then assets}
-    <div class="flex *:flex-auto *:hover:text-blue-500 text-2xl font-semibold">
-        {#each assets as _, i}
-            <button
-                class={i === current_index ? "text-pink-400" : "text-white/50"}
-                onclick={() => Jumper(i)}
-            >
-                {i + 1}
-            </button>
-        {/each}
-    </div>
-
-    <div class="fixed inset-0 z-[-1]" id="wrapper"></div>
-    <div
-        class="fixed inset-0 overflow-x-scroll aspect-video snap-x snap-mandatory [&>iframe]:aspect-video [&>iframe]:snap-center gap-10 z-[-2] scroll-smooth brightness-50 [&>*]:w-full [&>*]:h-full"
-        bind:this={bg_player}
-    >
-        {#each assets as item, i}
-            <div class="relative">
-                <div class="absolute top-[50%] left-[1em] text-black">
-                    <h1 class="font-bold text-9xl text-blance">{item.title}</h1>
-                </div>
-                <button
-                    class="h-full w-full"
-                    aria-label={`Play video titled ${item.title}`}
-                >
-                    <YtPlayer
-                        id={item.src}
-                        index={i}
-                        is_mute={is_mute}
-                        ok={player_handle}
-                        end={() => Jumper(current_index + 1)}
-                    />
-                </button>
+{#await response}
+    <p>Fetching data...</p>
+    {:then assets}
+        {#if assets}
+        <a href={assets[current_index].link} class=" hover:text-pink-400">{assets[current_index].link?`Detail about ${assets[current_index].title}` : `Link is not available. Wait for updating DB`}</a>
+            <div class="flex *:flex-auto *:hover:text-blue-500 text-2xl font-semibold">
+                {#each assets as _, i}
+                    <button
+                        class={i === current_index ? "text-pink-400" : "text-white/50"}
+                        onclick={() => Jumper(i)}
+                    >
+                        {i + 1}
+                    </button>
+                {/each}
             </div>
-        {/each}
-    </div>
+            <div class="fixed inset-0 z-[-1]" id="wrapper"></div>
+            <div
+                class="fixed inset-0 overflow-x-scroll aspect-video snap-x snap-mandatory [&>iframe]:aspect-video [&>iframe]:snap-center gap-10 z-[-2] scroll-smooth brightness-50 [&>*]:w-full [&>*]:h-full"
+                bind:this={bg_player}
+            >
+                {#each assets as item, i}
+                    <div class="relative">
+                        <div class="absolute top-[50%] left-[1em] text-black">
+                            <h1 class="font-bold text-9xl text-blance">{item.title}</h1>
+                        </div>
+                        <button
+                            class="h-full w-full"
+                            aria-label={`Play video titled ${item.title}`}
+                        >
+                            <YtPlayer
+                                id={item.src}
+                                index={i}
+                                ok={player_handle}
+                                end={() => Jumper(current_index + 1)}
+                            />
+                        </button>
+                    </div>
+                {/each}
+            </div>
+        {/if}
+    {:catch}
+        <div class=" bg-red-500 font-bold text-2xl">
+            <p>Error Occurred while fetching db data.</p>
+            <p>Please reload page.</p>
+        </div>
 {/await}
+

@@ -24,7 +24,7 @@
 </script>
 
 <div class="grid grid-cols-2">
-    <YtPlayer id="gcrIuZ20A60" ok={handle} index={0} is_mute={false} end={()=>{play()}}/>
+    <YtPlayer id="gcrIuZ20A60" ok={handle} index={0} end={()=>{play()}}/>
     <div class="grid grid-cols-2">
         <button onclick={play}>Play</button>
         <button onclick={pause}>Stop</button>

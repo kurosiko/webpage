@@ -3,11 +3,10 @@
     type Props = {
         id:string,
         index:number,
-        is_mute:boolean,
         ok: (args:{player:any,index:number}) => void,
         end:()=>void
     }
-    const { id = 'M7lc1UVf-VE',index = 0,is_mute = true,ok,end = ()=>{}}:Props = $props();
+    const { id = 'M7lc1UVf-VE',index = 0,ok,end = ()=>{}}:Props = $props();
     let videoId = id;
     let player: any;
     let windowRef:any;
@@ -22,8 +21,9 @@
                 disablekb:0,
                 fs:0,
                 controls:0,
-                mute:is_mute ? 1 : 0,
-                loop:1
+                mute:1,
+                loop:1,
+                volume:20
             },
             events:{
                 onReady: (event: any) => {
