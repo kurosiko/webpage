@@ -6,5 +6,5 @@ compatibility_date = "2025-03-12"
 
 [[d1_databases]]
 binding = "DB"
-database_name = "${secrets.DB_NAME}"
-database_id = "${secrets.DB_ID}"
+database_name = "${secrets.CF_DB_NAME}"
+database_id = "${secrets.CF_DB_ID}"
