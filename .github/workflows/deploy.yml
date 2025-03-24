@@ -11,6 +11,11 @@ jobs:
     name: Deploy
     steps:
       - uses: actions/checkout@v4
+      - name: Create wrangler.toml
+        run: |
+          echo 'database_name = "${{secrets.CF_DB_NAME}}"' >> wrangler.toml
+          echo 'database_id = "${{secrets.CF_DB_ID}}"'' >> wrangler.toml
+
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
         with:
