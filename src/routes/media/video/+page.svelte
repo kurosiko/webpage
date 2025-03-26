@@ -63,7 +63,7 @@
             vol(volume)
             if (shouldPlay) wait_for_playing.setup()
         };
-        response = fetch("/api/video").then((item:any)=>item.json()).then((videos:Response_Video[])=>videos)
+        response = fetch("https://api.kurosiko.com/video/get").then((item:any)=>item.json()).then((videos:Response_Video[])=>videos)
         window.addEventListener("resize", () => Jumper(current_index, false));
     });
 

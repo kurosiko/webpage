@@ -39,20 +39,18 @@
     
     onMount(()=>{
         ImagesDOM = async ()=>{
-        const response = await fetch("https://api.kurosiko.com/get-db",{
-            method:"POST",
+        const response = await fetch(`https://api.kurosiko.com/image/get?limit=${limit}${rand ? "&rand=1" :""}`,{
+            method:"GET",
             mode:"cors",
-            body:JSON.stringify({rand:rand,limit:limit ? limit : 0})
         })
         const data = (await response.json()) as response_c[];
         if(!data) return
         image = data
         console.log(data)
-        
         return
         }
         PostImage = async ()=>{
-            const request = await fetch("https://api.kurosiko.com/reg-db",{
+            const request = await fetch("https://api.kurosiko.com/image/reg",{
                 method:"POST",
                 mode:"cors",
                 body: input
@@ -61,7 +59,7 @@
             return
         }
         DeleteImage = async (url:string)=>{
-            const request = await fetch("https://api.kurosiko.com/del-db",{
+            const request = await fetch("https://api.kurosiko.com/image/del",{
                 method:"POST",
                 mode:"cors",
                 body:url,
