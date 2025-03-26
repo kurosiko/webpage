@@ -1,0 +1,8 @@
+name = "webpage"
+pages_build_output_dir = ".svelte-kit\\cloudflare"
+compatibility_date = "2025-03-12"
+
+[[env.production.d1_databases]]
+database_id = "$DB_ID"
+binding = "DB"
+database_name = "$DB_NAME"
