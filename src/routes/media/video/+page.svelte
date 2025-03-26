@@ -1,7 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import YtPlayer from "$lib/YT_Player.svelte";
-    import { read } from "$app/server";
     let bg_player: HTMLDivElement | null = $state(null);
     let iframe_list: HTMLIFrameElement[] = [];
     let video_list:{player:any,index:number}[] = []
