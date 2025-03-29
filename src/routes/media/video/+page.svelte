@@ -3,6 +3,7 @@
     import YtPlayer from "$lib/YT_Player.svelte";
     let bg_player: HTMLDivElement | null = $state(null);
     let iframe_list: HTMLIFrameElement[] = [];
+    let optionRefs:HTMLButtonElement[] = [];
     let video_list:{player:any,index:number}[] = []
     let current_index = $state(0);
     let is_mute = $state(true);
@@ -54,10 +55,19 @@
     onMount(() => {
         Jumper = (index: number, shouldPlay = true) => {
             if (shouldPlay) wait_for_playing.cancel()
-            if (index >= video_list.length) index = 0;
+            if (index >= video_list.length) {
+                index = 0
+                optionRefs[index].scrollIntoView({behavior:"instant"})
+            }else if(index < 0){
+                index = video_list.length
+                optionRefs[index].scrollIntoView({behavior:"instant"})
+            }else{
+                optionRefs[index].scrollIntoView({behavior:"smooth",inline:"center"})
+            }
             current_index = index;
-            const target = iframe_list[index];
-            target.scrollIntoView({ behavior: "smooth" });
+            iframe_list[index].scrollIntoView({ behavior: "smooth"});
+            
+            
             if (!shouldPlay) return;
             video_list.forEach((item: any) => stop(item.player));
             vol(volume)
@@ -72,7 +82,10 @@
         video_list.push(event);
         video_list.sort((a: any, b: any) => a.index - b.index);
         if(event.index == 0) wait_for_playing.setup()
-    };
+
+    }; 
+    
+
 </script>
 
 <h1>!!These contents are not my creation!!</h1>
@@ -98,9 +111,10 @@
     {:then assets}
         {#if assets}
         <a href={assets[current_index].link} class=" hover:text-pink-400">{assets[current_index].link?`Detail about ${assets[current_index].title}` : `Link is not available. Wait for updating DB`}</a>
-            <div class="flex *:flex-auto *:hover:text-blue-500 text-2xl font-semibold">
+            <div class="flex *:flex-auto gap-40 *:hover:text-blue-500 text-2xl font-semibold overflow-x-hidden">
                 {#each assets as _, i}
                     <button
+                        bind:this={optionRefs[i]}
                         class={i === current_index ? "text-pink-400" : "text-white/50"}
                         onclick={() => Jumper(i)}
                     >
@@ -108,6 +122,8 @@
                     </button>
                 {/each}
             </div>
+            <button onclick={()=>{Jumper(current_index+1)}}>Next</button>
+            <button onclick={()=>{Jumper(current_index-1)}}>Prev</button>
             <div class="fixed inset-0 z-[-1]" id="wrapper"></div>
             <div
                 class="fixed inset-0 overflow-x-scroll aspect-video snap-x snap-mandatory [&>iframe]:aspect-video [&>iframe]:snap-center z-[-2] scroll-smooth brightness-50 [&>*]:w-full [&>*]:h-full"
@@ -115,10 +131,10 @@
             >
                 {#each assets as item, i}
                     <div class="relative">
-                        <div class="absolute top-[50%] left-[1em] z-1 text-black">
+                        <div class="absolute top-[50%] left-[1em] z-2 text-black">
                             <h1 class="font-bold text-9xl text-blance">{item.title}</h1>
                         </div>
-                        <img class="absolute w-full h-full transition-all duration-1000 ease-in-out" style={ready ? "opacity:0":""}  src={`https://i.ytimg.com/vi_webp/${item.src}/maxresdefault.webp`} alt="thumbnail">
+                        <img class="absolute w-full h-full transition-all duration-1000 ease-in-out z-1" style={ready ? "opacity:0":""}  src={`https://i.ytimg.com/vi_webp/${item.src}/maxresdefault.webp`} alt="thumbnail">
 
                         <YtPlayer
                             id={item.src}
