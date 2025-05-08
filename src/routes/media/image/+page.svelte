@@ -72,7 +72,7 @@
 
 <svelte:component this={ImagesDOM} />
 
-<div class="p-2 flex gap-5">
+<div class="p-2 flex gap-5 overflow-x-auto">
     <button onclick={PostImage} class="p-2 border-pink-300 border-2 border-double rounded-sm hover:border-blue-400 transition-all">Submit</button>
     <div class="relative">
         <input bind:value={input} type="text" class="peer bg-transparent h-10 w-72 rounded-lg text-gray-200 placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600" placeholder="Type inside me"/><label for="username" class="absolute cursor-text left-0 -top-3 text-sm text-gray-500 bg-inherit mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all">Enter a link</label>
@@ -115,5 +115,3 @@
         <Viewer data={detail_data} detail={close_popup}></Viewer>
     {/if}
 </div>
-
-

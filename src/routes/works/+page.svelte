@@ -11,6 +11,12 @@
         <Content title="Webpage" subtitle="With Sveltekit" to="https://github.com/kurosiko/webpage"/>
         <Content title="Sparkly" subtitle="Customize Your Desktop" to="https://github.com/kurosiko/Sparkly"/>
     </div>
+    <h1 class="content_title">PLANNING (TENTATIVE)</h1>
+    <div>
+        <Content title="Gui Lib" subtitle="Gui Library" to=""/>
+        <Content title="Custom Shell" subtitle="Cool" to=""/>
+        <Content title="Launcher" subtitle="App Launcher" to=""/>
+    </div>
     <h1 class="content_title">OUTDATED</h1>
     <div>
         <Content title="VideoFetcher" subtitle="Easy & Fast YT Download Tool" to="https://github.com/kurosiko/Kuros-VideoFetcher"/>
