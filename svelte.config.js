@@ -3,7 +3,7 @@ import adapter from "@sveltejs/adapter-cloudflare"
 export default {
     preprocess: vitePreprocess(),
     kit: {
-        adapter: adapter(),
+        adapter: adapter({include:['./*'],exclude:['<all>']}),
     },
 };
 
