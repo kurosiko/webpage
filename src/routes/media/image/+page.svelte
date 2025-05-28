@@ -7,31 +7,31 @@
         user:string | null,
         tweet:string | null
     }
-    let ImagesDOM:()=>Promise<void>;
+    let ImagesDOM = $state<() => Promise<void>>(async () => {});
     let PostImage:()=>Promise<void>;
     let DeleteImage:(url:string)=>Promise<void>;
-    let image:response_c[] = [];
+    let image = $state<response_c[]>([]);
     let input = "";
-    let limit:number = 20;
-    let rand:boolean = true;
-    let grid :number = 5
-    let grid_auto :boolean = false
-    let detail :boolean = false;
+    let limit = $state(20);
+    let rand = $state(true);
+    let grid = $state(5);
+    let grid_auto = $state(false);
+    let detail = $state(false);
     let close_popup:()=>void = ()=>{
         detail = false
     }
-    let detail_data:{
+    let detail_data = $state<{
         url:string,
         user:string,
         tweet:string
-    } = {
+    }>({
         url:"",
         user:"",
         tweet:""
-    }
+    });
     const fetch_eternal = () =>{
             setTimeout(async ()=>{
-                if(page.url.pathname !== "/media/image") return
+                if (page.url.pathname !== "/media/image") return
                 await ImagesDOM()
                 fetch_eternal()
             },30000)
@@ -44,13 +44,13 @@
             mode:"cors",
         })
         const data = (await response.json()) as response_c[];
-        if(!data) return
-        image = data
         console.log(data)
+        if(!data) return
+        image = data;
         return
         }
         PostImage = async ()=>{
-            const request = await fetch("https://api.kurosiko.com/image/reg",{
+            await fetch("https://api.kurosiko.com/image/reg",{
                 method:"POST",
                 mode:"cors",
                 body: input
@@ -59,7 +59,7 @@
             return
         }
         DeleteImage = async (url:string)=>{
-            const request = await fetch("https://api.kurosiko.com/image/del",{
+            await fetch("https://api.kurosiko.com/image/del",{
                 method:"POST",
                 mode:"cors",
                 body:url,
@@ -68,15 +68,23 @@
         }
         fetch_eternal()
     })
+    let image_quality_data:{value:string,lable:string}[] = [
+        {value:"small",lable:"Small"},
+        {value:"medium",lable:"Medium"},
+        {value:"large",lable:"Large"},
+        {value:"orig",lable:"Original"},
+    ]
+    let image_quality = $state('medium');
+    const base_url = "https://pbs.twimg.com/media/";
+    const request_url_generator:(image_id:string)=>string = (image_id:string)=>{
+        const image_url = new URL(`${image_id}`,base_url)
+        image_url.searchParams.append("format","jpg")
+        image_url.searchParams.append("name",image_quality)
+        return image_url.toString()
+    }
 </script>
 
-<svelte:component this={ImagesDOM} />
-
 <div class="p-2 flex gap-5 overflow-x-auto">
-    <button onclick={PostImage} class="p-2 border-pink-300 border-2 border-double rounded-sm hover:border-blue-400 transition-all">Submit</button>
-    <div class="relative">
-        <input bind:value={input} type="text" class="peer bg-transparent h-10 w-72 rounded-lg text-gray-200 placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600" placeholder="Type inside me"/><label for="username" class="absolute cursor-text left-0 -top-3 text-sm text-gray-500 bg-inherit mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all">Enter a link</label>
-    </div>
     <div class="flex gap-5 text-center justify-center items-center border-b-pink-300 border-b-2 px-5">
         <input type="checkbox" bind:checked={rand}/>
         <div>Random</div>
@@ -87,6 +95,18 @@
         <div>Grid</div>
         <input type="number" bind:value={grid}>
     </div>
+    <div class="flex gap-5 text-center justify-center items-center border-b-pink-300 border-b-2 px-5">
+        <input type="checkbox" bind:checked={grid_auto}/>
+        <div>Format</div>
+        <select
+            class="text-white bg-black p-2"
+            bind:value={image_quality}
+        >
+            {#each image_quality_data as image_quality_options}
+                <option value={image_quality_options.value}>{image_quality_options.lable}</option>
+            {/each}
+        </select>
+    </div>
     <button onclick={ImagesDOM} class="p-2 border-pink-300 border-2 border-double rounded-sm hover:border-blue-400 transition-all">Reload</button>
 </div>
 
@@ -95,15 +115,18 @@
     {#each image as item}
         {#if item.url}
             <div class="group relative">
-                <img class="object-cover w-full" src={`https://pbs.twimg.com/media/${item.url}`} alt={item.url}/>
+                <img class="object-cover w-full" src={request_url_generator(item.url)} alt={item.url}/>
                 <div class="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 m-auto transition-all flex flex-col [&>*]:flex-auto [&>*]:border-2 [&>*]:w-full [&>*]:mb-[-1px] justify-center text-center items-center">
                     {#if item.tweet && item.user}
-                        <!-- svelte-ignore a11y_consider_explicit_label -->
-                        <!-- svelte-ignore element_invalid_self_closing_tag -->
-                        <button onclick={()=>{
+                        <button 
+                            onclick={()=>{
                                 detail = true
                                 detail_data = {url:item.url || '',tweet:item.tweet || '' ,user:item.user || ''}
-                        }}/>
+                            }}
+                            aria-label="Show image details"
+                        >
+                            Show Details
+                        </button>
                         {:else}
                         <p>src not found</p>
                     {/if}
