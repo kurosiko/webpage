@@ -9,6 +9,7 @@
         "@tailwindcss/postcss": "^4.1.5",
         "@tailwindcss/vite": "^4.1.5",
         "@tsconfig/svelte": "^5.0.4",
+        "@types/node": "^22.15.23",
         "autoprefixer": "^10.4.21",
         "css": "^3.0.0",
         "post": "^0.0.1",

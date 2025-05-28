@@ -1,19 +1,15 @@
 <script lang="ts">
+  import { redirect } from "@sveltejs/kit";
     import { onMount } from "svelte";
     let adult = ()=>{}
     let kid = ()=>{}
-    let check:()=>boolean = ()=>cookies.split("; ").some((item:string)=>item == "r18=true")
-    let cookies: string = ""
     let is_adult = false;
     onMount(()=>{
-        cookies = document.cookie
-        is_adult = check()
-        adult = ()=>{
-            document.cookie = "r18=true;max-age=432000"
-            window.location.href = "/media"
+        adult = async ()=>{
+            await fetch("/adult")
         }
         kid = ()=>{
-            window.location.href = "/"
+            throw redirect(301,"/")
         }
     })
 </script>

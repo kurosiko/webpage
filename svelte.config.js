@@ -5,5 +5,8 @@ export default {
     kit: {
         adapter: adapter({include:['./*'],exclude:['<all>']}),
     },
+    compilerOptions:{
+        runes:true
+    }
 };
 

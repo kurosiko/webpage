@@ -17,6 +17,10 @@
     let grid = $state(5);
     let grid_auto = $state(false);
     let detail = $state(false);
+    let expand = $state(false);
+    let close_expand:()=>void = ()=>{
+        expand = false;
+    }
     let close_popup:()=>void = ()=>{
         detail = false
     }
@@ -130,11 +134,32 @@
                         {:else}
                         <p>src not found</p>
                     {/if}
+                    <button
+                        onclick={()=>{
+                            expand = true;
+                            detail_data = {url:item.url || '',tweet:item.tweet || '' ,user:item.user || ''}
+                        }}
+                    >
+                        Expand
+                    </button>
                 </div>
             </div>
         {/if}
     {/each}
+    {#if expand}
+            <div class="fixed w-full h-full top-0 left-0 z-100 backdrop-blur-lg">
+                <img src={request_url_generator(detail_data.url)} alt="big image" class="w-full h-full object-contain"/>
+                <button 
+                    onclick={()=>{
+                        expand = false;
+                    }}
+                    class="fixed right-20 bottom-20 bg-black opacity-50 p-5 border-2 border-white rounded-md"
+                    >
+                    CLOSE
+                </button>
+            </div> 
+    {/if}
     {#if detail && detail_data}
-        <Viewer data={detail_data} detail={close_popup}></Viewer>
+        <Viewer data={detail_data} close={close_popup}></Viewer>
     {/if}
 </div>
