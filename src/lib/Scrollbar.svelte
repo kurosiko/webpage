@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    let bar:number = 0
+    let bar:number = $state(0)
     const updateBar = ()=>{
         const current_y = window.scrollY
         const availHeight = document.documentElement.scrollHeight - window.innerHeight

@@ -1,19 +1,23 @@
 <script lang="ts">
-  import { redirect } from "@sveltejs/kit";
-    import { onMount } from "svelte";
-    let adult = ()=>{}
-    let kid = ()=>{}
-    let is_adult = false;
-    onMount(()=>{
-        adult = async ()=>{
-            await fetch("/adult")
-        }
-        kid = ()=>{
-            throw redirect(301,"/")
-        }
-    })
+  import { goto } from "$app/navigation";
+  import { page } from "$app/state"
+    let show = $state(true);
+    async function adult() {
+        await fetch("/adult",{
+            headers:{
+                request_from:page.url.pathname
+            }
+            }
+        )
+        show = false;
+    }
+
+    function kid() {
+        goto("/")
+    }
 </script>
-{#if !is_adult}
+    
+{#if show}
     <div class="fixed z-200 inset-0 bg-black/20 backdrop-blur-md items-center text-center" >
     <div class="m-50">
         <label for="age-confirmation">This page contains R-18 contents.</label>
@@ -25,4 +29,3 @@
     </div>
     </div>
 {/if}
-

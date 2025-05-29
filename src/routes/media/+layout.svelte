@@ -7,8 +7,6 @@
     import type { LayoutProps } from "./$types";
     let hide_warn = $state(false);
     let {data,children}:LayoutProps = $props();
-    
-    
 </script>
 {#if !data.adult}
     <CheckAdult/>

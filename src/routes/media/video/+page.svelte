@@ -35,12 +35,12 @@
     };
     let Jumper: (index: number, shouldPlay?: boolean) => void;
     let response = $state<Promise<Response_Video[]>|null>(null);
-    const wait_for_playing:{
-        timeout:number,
-        setup:()=>void,
-        cancel:()=>void,
+    const wait_for_playing: {
+        timeout: NodeJS.Timeout | null;
+        setup: () => void;
+        cancel: () => void;
     } = {
-        timeout: 0,
+        timeout: null,
         setup() {
             this.timeout = setTimeout(() => {
                 play(video_list[current_index].player)
@@ -49,7 +49,10 @@
         },
         cancel() {
             ready = false;
-            clearTimeout(this.timeout);
+            if (this.timeout) {
+                clearTimeout(this.timeout);
+                this.timeout = null;
+            }
         }
     }
     onMount(() => {
@@ -77,8 +80,7 @@
         window.addEventListener("resize", () => Jumper(current_index, false));
     });
 
-    const player_handle = (event: {player:any,index:number}) => {    
-        ready = true;
+    const player_handle = (event: {player:any,index:number}) => {
         video_list.push(event);
         video_list.sort((a: any, b: any) => a.index - b.index);
         if(event.index == 0) wait_for_playing.setup()
@@ -135,7 +137,6 @@
                             <h1 class="font-bold text-9xl text-blance">{item.title}</h1>
                         </div>
                         <img class="absolute w-full h-full transition-all duration-1000 ease-in-out z-1" style={ready ? "opacity:0":""}  src={`https://i.ytimg.com/vi_webp/${item.src}/maxresdefault.webp`} alt="thumbnail">
-
                         <YtPlayer
                             id={item.src}
                             index={i}

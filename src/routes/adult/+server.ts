@@ -8,5 +8,6 @@ export const GET: RequestHandler = ({ request, cookies }) => {
         secure:false,
         sameSite:"lax"
     })
-    throw redirect(301,"/media");
+    redirect(301,"/media")
+    return new Response("ok",{status:200})
 }
